@@ -38,7 +38,7 @@ async function route() {
 }
 
 function setTitle(t) {
-  document.title = t ? `${t} · Next Issue` : "Next Issue · Marvel Unlimited reading lists";
+  document.title = t ? `${t} · Next Issue` : "Next Issue · Comic reading lists for Marvel Unlimited";
 }
 
 function newDraft(list, replace = false) {
@@ -147,8 +147,9 @@ function home() {
 
   app.replaceChildren(
     h("header", { class: "hero" },
-      h("h1", {}, "Build a reading list. ", h("span", {}, "Share it as a link.")),
-      h("p", { class: "lede" }, "Search the Marvel Unlimited catalog, put issues in order, and send the link to anyone. Every issue opens straight in the Marvel Unlimited app with one tap. No account needed."),
+      h("p", { class: "eyebrow" }, "Unofficial companion for Marvel Unlimited subscribers"),
+      h("h1", {}, "Build a comic reading list, ", h("span", {}, "issue by issue.")),
+      h("p", { class: "lede" }, "Pick the comics, put the issues in reading order, and share the list as a link. Every issue opens straight in the Marvel Unlimited app with one tap. No account needed."),
       h("div", { class: "cta" },
         h("button", { class: "btn primary big", type: "button", onclick: () => newDraft() }, "Start a list"),
         h("a", { class: "btn big", href: "#f=dawn-of-x" }, "See an example"))),
