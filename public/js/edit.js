@@ -1,7 +1,7 @@
 // List editor: search series, add issues/ranges, sections, drag reorder, notes, paste import.
 import {
   h, $, toast, coverUrl, issueName, seriesName, searchSeries, loadSeries, loadIndex, resolveIds,
-  drafts, norm, stepper,
+  drafts, norm, stepper, compactKey, editDistance, typoBudget,
 } from "./lib.js";
 
 export async function renderEditor(root, list, draftId, { onPreview, onDetails }) {
@@ -230,21 +230,72 @@ export async function renderEditor(root, list, draftId, { onPreview, onDetails }
   }
 
   // paste import
-  const pasteIn = h("textarea", { rows: 8, placeholder: "One per line, e.g.\n# House of X\nHouse of X (2019) #1\nPowers of X (2019) #1-2\nMarauders 2019 #1-6\nX-Men #1", "aria-label": "Paste a reading order" });
+  const pasteIn = h("textarea", { rows: 8, placeholder: "One per line, e.g.\n# House of X\nHouse of X (2019) #1\nPowers of X #1-2 (2019)\nMarauders 2019 #1-6\nX-Men #1", "aria-label": "Paste a reading order" });
   const pasteOut = h("div", { class: "paste-out", "aria-live": "polite" });
+  const importBtn = h("button", { class: "btn primary", type: "button", onclick: runImport }, "Import");
   pasteBox.append(
-    h("p", { class: "hint" }, "Paste a reading order. Lines starting with # become sections. Anything we can't match is kept as a title you can copy into the app's search."),
-    pasteIn,
-    h("button", { class: "btn primary", type: "button", onclick: async () => {
-      const r = await importText(pasteIn.value, list, target, info);
-      target = list.sections.length - 1;
-      save(); drawList(); drawTargets(); refreshTiles();
-      pasteOut.replaceChildren(h("p", {}, `Added ${r.added} issue${r.added === 1 ? "" : "s"}.`),
-        r.missed.length ? h("details", { open: r.missed.length < 6 }, h("summary", {}, `${r.missed.length} not found (kept as copyable titles)`),
-          h("ul", {}, r.missed.map((m) => h("li", {}, m)))) : "");
-      if (r.added) toast(`Imported ${r.added} issues`);
-    } }, "Import"),
-    pasteOut);
+    h("p", { class: "hint" }, "Paste a reading order. Lines starting with # become sections. If a title matches more than one series, we'll ask which one. Anything we can't match is kept as a title you can copy into the app's search."),
+    pasteIn, importBtn, pasteOut);
+
+  async function runImport() {
+    if (!pasteIn.value.trim()) return toast("Paste some lines first");
+    importBtn.disabled = true;
+    importBtn.textContent = "Matching…";
+    try {
+      const { plan, questions } = await planImport(pasteIn.value);
+      if (!questions.length) return await finishImport(plan, new Map());
+      askSeries(plan, questions);
+    } finally {
+      importBtn.disabled = false;
+      importBtn.textContent = "Import";
+    }
+  }
+
+  // "X-Men #1" matches several series: ask once per title, suggestion preselected
+  function askSeries(plan, questions) {
+    const choices = new Map(questions.map((q) => [q.key, q.suggested]));
+    const opt = (q, i, c) => {
+      const s = c.s;
+      const range = s.r ? (s.r[0] === s.r[1] ? `#${s.r[0]}` : `#${s.r[0]}–${s.r[1]}`) : "";
+      const years = s.d ? (s.d[0] === s.d[1] ? s.d[0] : `${s.d[0]}–${s.d[1]}`) : "";
+      return h("label", { class: `amb-opt${c.hits ? "" : " none"}` },
+        h("input", { type: "radio", name: `amb-${i}`, checked: s.id === q.suggested, onchange: () => choices.set(q.key, s.id) }),
+        s.c ? h("img", { class: "thumb", src: coverUrl(s.c, 120), alt: "", loading: "lazy", width: 40, height: 60, referrerpolicy: "no-referrer" }) : h("span", { class: "thumb none" }),
+        h("span", { class: "t" },
+          h("b", {}, seriesName(s.t, s.y)), s.id === q.suggested ? h("span", { class: "tag sugg" }, "suggested") : "",
+          h("span", { class: "meta" }, [range, years].filter(Boolean).join(" · ")),
+          h("span", { class: "meta hits" }, c.hits === q.want ? `Has all ${q.want === 1 ? "of it" : q.want}` : `Has ${c.hits} of ${q.want}`)));
+    };
+    pasteOut.replaceChildren(
+      h("div", { class: "amb-wrap" },
+        h("h3", {}, questions.length === 1 ? "One title needs a closer look" : `${questions.length} titles need a closer look`),
+        h("p", { class: "hint" }, "These match more than one series, or look misspelled. Pick the right one for each; your choice applies to every line with that title."),
+        questions.map((q, i) => {
+          const good = q.cands.filter((c) => c.hits > 0), rest = q.cands.filter((c) => !c.hits);
+          return h("fieldset", { class: "amb" },
+            h("legend", {}, h("b", {}, q.fuzzy ? `"${q.title}": did you mean…?` : q.year ? `${q.title} (${q.year})` : q.title),
+              h("span", { class: "meta" }, `${q.year && !q.cands.some((c) => c.s.y === q.year) ? `No ${q.year} series found. ` : ""}Lines: ${q.lines.slice(0, 8).join(", ")}${q.lines.length > 8 ? "…" : ""}`)),
+            good.map((c) => opt(q, i, c)),
+            rest.length ? h("details", {}, h("summary", {}, `${rest.length} other series named "${q.title}" without these issues`), rest.map((c) => opt(q, i, c))) : "",
+            h("label", { class: "amb-opt skip" },
+              h("input", { type: "radio", name: `amb-${i}`, checked: q.suggested == null, onchange: () => choices.set(q.key, null) }),
+              h("span", { class: "t" }, h("b", {}, "None of these"), h("span", { class: "meta" }, "Keep these lines as copyable titles"))));
+        }),
+        h("div", { class: "form-acts" },
+          h("button", { class: "btn primary big", type: "button", onclick: () => finishImport(plan, choices) }, "Finish import"),
+          h("button", { class: "btn big", type: "button", onclick: () => pasteOut.replaceChildren() }, "Cancel"))));
+    pasteOut.scrollIntoView({ block: "start", behavior: "smooth" });
+  }
+
+  async function finishImport(plan, choices) {
+    const r = await applyPlan(plan, choices, list, target, info);
+    target = list.sections.length - 1;
+    save(); drawList(); drawTargets(); refreshTiles();
+    pasteOut.replaceChildren(h("p", {}, `Added ${r.added} issue${r.added === 1 ? "" : "s"}.`),
+      r.missed.length ? h("details", { open: r.missed.length < 6 }, h("summary", {}, `${r.missed.length} not found (kept as copyable titles)`),
+        h("ul", {}, r.missed.map((m) => h("li", {}, m)))) : "");
+    if (r.added) toast(`Imported ${r.added} issues`);
+  }
 
   const modeSearch = h("button", { class: "seg on", type: "button", "aria-pressed": "true", onclick: () => mode("search") }, "Search");
   const modePaste = h("button", { class: "seg", type: "button", "aria-pressed": "false", onclick: () => mode("paste") }, "Paste a list");
@@ -303,7 +354,12 @@ export async function renderEditor(root, list, draftId, { onPreview, onDetails }
 
 const LINE = /^(.*?)\s*(?:\((\d{4})\)|\b(\d{4})\b)?\s*(?:#|\bissues?\s+|\s)\s*(\d+(?:\.\d+)?)(?:\s*(?:-|–|—|to)\s*#?\s*(\d+(?:\.\d+)?))?\s*$/i;
 
+// "X-Men #1 (2019)" or "X-Men #1-6 (2019)": year after the number
+const YEAR_AFTER = /^(.*?)\s*(#\s*\d[\d.]*(?:\s*(?:-|–|—|to)\s*#?\s*\d[\d.]*)?)\s*\((\d{4})\)\s*$/i;
+
 export function parseLine(line) {
+  const ya = line.match(YEAR_AFTER);
+  if (ya) line = `${ya[1]} (${ya[3]}) ${ya[2]}`;
   const m = line.match(LINE);
   if (!m || !m[1].trim()) return null;
   // a bare 4-digit number may be part of the title ("X-Men 2099"), so keep that reading too
@@ -311,51 +367,136 @@ export function parseLine(line) {
   return { title, year: +(m[2] || m[3]) || null, alt: m[3] ? `${title} ${m[3]}` : null, a: +m[4], b: +(m[5] || m[4]) };
 }
 
-export async function importText(text, list, target, info) {
-  const idx = await loadIndex();
-  const byTitle = new Map();
+// Two passes so ambiguous titles can be asked about before anything is added:
+// planImport() parses and matches every line; applyPlan() adds them in order once choices are made.
+
+// lookup(title) -> {cands, fuzzy}. Exact on the spelling-insensitive key ("xmen" = "X-Men");
+// otherwise the closest titles within a small typo budget, flagged fuzzy so the user confirms.
+function titleIndex(idx) {
+  const byKey = new Map();
   for (const s of idx) {
-    const k = norm(s.t);
-    if (!byTitle.has(k)) byTitle.set(k, []);
-    byTitle.get(k).push(s);
+    const k = compactKey(s.t);
+    if (!byKey.has(k)) byKey.set(k, []);
+    byKey.get(k).push(s);
   }
-  let sec = list.sections[target];
-  let added = 0;
-  const missed = [];
+  const keys = [...byKey.keys()];
+  return (t) => {
+    const k = compactKey(t);
+    if (byKey.has(k)) return { cands: byKey.get(k), fuzzy: false };
+    const budget = typoBudget(k);
+    if (!budget) return { cands: [], fuzzy: false };
+    let best = budget + 1, hits = [];
+    for (const key of keys) {
+      const d = editDistance(k, key, budget);
+      if (d < best) { best = d; hits = [key]; } else if (d === best) hits.push(key);
+    }
+    return best <= budget ? { cands: hits.flatMap((key) => byKey.get(key)), fuzzy: true } : { cands: [], fuzzy: false };
+  };
+}
+
+const nums = (p) => {
+  const out = [];
+  for (let n = p.a; n <= p.b && out.length <= 500; n++) out.push(n);
+  return out;
+};
+
+async function hitsIn(sid, wanted) {
+  const s = await loadSeries(sid).catch(() => null);
+  if (!s) return 0;
+  const have = new Set(s.issues.filter((i) => i.num != null).map((i) => +i.num));
+  return wanted.filter((n) => have.has(n)).length;
+}
+
+export async function planImport(text) {
+  const lookup = titleIndex(await loadIndex());
+  const plan = [];
+  const questions = new Map(); // key -> {key, title, year, lines, wanted:Set, cands}
+  const knownYears = [];
+
   for (let raw of text.split(/\r?\n/)) {
     raw = raw.replace(/^\s*(?:[-*•]|\d+[.)])\s+/, "").trim();
     if (!raw) continue;
     const head = raw.match(/^#{1,6}\s*(.+)$/) || raw.match(/^(.+):$/);
-    if (head) {
-      if (sec.items.length || sec.name) list.sections.push((sec = { name: head[1].trim(), desc: "", items: [] }));
-      else sec.name = head[1].trim();
+    if (head) { plan.push({ kind: "section", name: head[1].trim() }); continue; }
+    const p = parseLine(raw);
+    if (!p) { plan.push({ kind: "text", text: raw }); continue; }
+
+    const L = lookup(p.title);
+    const all = L.cands;
+    let fuzzy = L.fuzzy;
+    let cands = p.year ? all.filter((c) => c.y === p.year) : all;
+    if (!cands.length && p.alt) { const A = lookup(p.alt); cands = A.cands; fuzzy = A.fuzzy; } // "X-Men 2099 #1": the number was part of the title
+    if (!cands.length && p.year && all.length) cands = all; // year given but no series has it: ask
+    if (cands.length === 1 && !fuzzy) {
+      plan.push({ kind: "issue", p, sid: cands[0].id });
+      if (cands[0].y) knownYears.push(cands[0].y);
       continue;
     }
-    const p = parseLine(raw);
-    if (!p) { missed.push(raw); sec.items.push({ text: raw, opt: false, note: "" }); continue; }
-    let cands = byTitle.get(norm(p.title)) || byTitle.get(norm(p.title.replace(/^the\s+/i, ""))) || [];
-    if (p.year) cands = cands.filter((c) => c.y === p.year);
-    if (!cands.length && p.alt) cands = byTitle.get(norm(p.alt)) || [];
-    // prefer a volume whose numbering covers the requested issues, then the bigger run
-    cands = [...cands].sort((x, y) => covers(y, p) - covers(x, p) || y.n - x.n);
-    const s = cands[0] && (await loadSeries(cands[0].id).catch(() => null));
-    for (let n = p.a; n <= p.b; n++) {
+    if (!cands.length) { plan.push({ kind: "issue", p, sid: null }); continue; }
+
+    // several series share this title: if exactly one actually has these issues, take it
+    const wanted = nums(p);
+    const hits = await Promise.all(cands.map((c) => hitsIn(c.id, wanted)));
+    const withHits = cands.filter((_, i) => hits[i] > 0);
+    if (withHits.length === 1 && !fuzzy && !(p.year && withHits[0].y !== p.year)) {
+      plan.push({ kind: "issue", p, sid: withHits[0].id });
+      if (withHits[0].y) knownYears.push(withHits[0].y);
+      continue;
+    }
+    const key = `${compactKey(p.title)}|${p.year || ""}`;
+    if (!questions.has(key)) questions.set(key, { key, title: p.title, year: p.year, fuzzy, lines: [], wanted: new Set(), cands });
+    const q = questions.get(key);
+    q.lines.push(p.a === p.b ? `#${p.a}` : `#${p.a}–${p.b}`);
+    wanted.forEach((n) => q.wanted.add(n));
+    plan.push({ kind: "issue", p, q: key });
+  }
+
+  // score each question's candidates and pick a suggestion: the series closest in time
+  // to the rest of this import, among those that have the most of the wanted issues
+  const mid = knownYears.length ? knownYears.sort((a, b) => a - b)[Math.floor(knownYears.length / 2)] : null;
+  const qs = [];
+  for (const q of questions.values()) {
+    const wanted = [...q.wanted];
+    const scored = await Promise.all(q.cands.map(async (s) => ({ s, hits: await hitsIn(s.id, wanted) })));
+    const best = Math.max(...scored.map((c) => c.hits));
+    const pool = scored.filter((c) => c.hits === best);
+    const pick = mid != null
+      ? pool.reduce((a, b) => (Math.abs((b.s.y || 0) - mid) < Math.abs((a.s.y || 0) - mid) ? b : a))
+      : pool.reduce((a, b) => (b.s.n > a.s.n ? b : a));
+    scored.sort((a, b) => b.hits - a.hits || (b.s.y || 0) - (a.s.y || 0));
+    qs.push({ ...q, want: wanted.length, cands: scored, suggested: best > 0 ? pick.s.id : null });
+  }
+  return { plan, questions: qs };
+}
+
+// choices: question key -> series id, or null to keep those lines as text
+export async function applyPlan(plan, choices, list, target, info) {
+  let sec = list.sections[target];
+  let added = 0;
+  const missed = [];
+  for (const e of plan) {
+    if (e.kind === "section") {
+      if (sec.items.length || sec.name) list.sections.push((sec = { name: e.name, desc: "", items: [] }));
+      else sec.name = e.name;
+      continue;
+    }
+    if (e.kind === "text") { missed.push(e.text); sec.items.push({ text: e.text, opt: false, note: "" }); continue; }
+    const sid = e.q ? choices.get(e.q) : e.sid;
+    const s = sid ? await loadSeries(sid).catch(() => null) : null;
+    for (const n of nums(e.p)) {
       const iss = s?.issues.find((i) => i.num != null && +i.num === n);
-      const label = `${p.title}${p.year ? ` (${p.year})` : ""} #${n}`;
-      if (iss && !sec.items.some((x) => x.id === iss.id)) {
-        info.set(iss.id, iss);
-        sec.items.push({ id: iss.id, opt: false, note: "" });
-        added++;
-      } else if (!iss) {
-        missed.push(label);
-        sec.items.push({ text: label, opt: false, note: "" });
+      if (iss) {
+        if (!sec.items.some((x) => x.id === iss.id)) {
+          info.set(iss.id, iss);
+          sec.items.push({ id: iss.id, opt: false, note: "" });
+          added++;
+        }
+        continue;
       }
-      if (p.b - p.a > 500) break;
+      const label = s ? `${seriesName(s.t, s.y)} #${n}` : `${e.p.title}${e.p.year ? ` (${e.p.year})` : ""} #${n}`;
+      missed.push(label);
+      sec.items.push({ text: label, opt: false, note: "" });
     }
   }
   return { added, missed };
-}
-
-function covers(s, p) {
-  return s.r && +s.r[0] <= p.a && +s.r[1] >= p.b ? 1 : 0;
 }

@@ -214,13 +214,58 @@ export async function resolveIds(ids) {
 
 export const norm = (s) => s.toLowerCase().normalize("NFKD").replace(/[̀-ͯ]/g, "").replace(/&/g, " and ").replace(/[^a-z0-9]+/g, " ").trim();
 
+// Spelling-insensitive key: "X-Men", "xmen", "X Men" -> "xmen"; "The Amazing Spider-Man" -> "amazingspiderman"
+export const compactKey = (s) => norm(s).replace(/^the /, "").replace(/ /g, "");
+
+// Edit distance (adjacent swaps count as one edit, so "maruaders" is 1 from "marauders"),
+// with an early exit once it exceeds max (returns max + 1)
+export function editDistance(a, b, max = 2) {
+  if (Math.abs(a.length - b.length) > max) return max + 1;
+  let prev2 = null, prev = Array.from({ length: b.length + 1 }, (_, i) => i);
+  for (let i = 1; i <= a.length; i++) {
+    const cur = [i];
+    let rowMin = i;
+    for (let j = 1; j <= b.length; j++) {
+      let v = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      if (prev2 && i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) v = Math.min(v, prev2[j - 2] + 1);
+      cur[j] = v;
+      rowMin = Math.min(rowMin, v);
+    }
+    if (rowMin > max) return max + 1;
+    prev2 = prev;
+    prev = cur;
+  }
+  return prev[b.length];
+}
+
+// typo allowance grows with length: short titles must be exact
+export const typoBudget = (key) => (key.length < 5 ? 0 : key.length < 10 ? 1 : 2);
+
 let prepared;
 export async function searchSeries(q, limit = 40) {
   const idx = await loadIndex();
-  if (!prepared) prepared = idx.map((s) => ({ s, n: norm(s.t), toks: norm(s.t).split(" ") }));
+  if (!prepared) prepared = idx.map((s) => ({ s, n: norm(s.t), toks: norm(s.t).split(" "), c: compactKey(s.t) }));
   const nq = norm(q);
   if (!nq) return [];
+  const res = scoreSeries(prepared, nq);
+  if (res.length) return res.slice(0, limit).map((r) => r[1]);
+  // nothing matched word by word: fall back to close spellings of the whole title ("maruaders")
+  const words = nq.split(" ").filter((t) => !/^(19|20)\d\d$/.test(t));
+  const cq = compactKey(words.join(" "));
+  const budget = typoBudget(cq);
+  if (!budget) return [];
+  const fuzzy = [];
+  for (const p of prepared) {
+    const d = Math.min(editDistance(cq, p.c, budget), editDistance(cq, p.c.slice(0, cq.length), budget));
+    if (d <= budget) fuzzy.push([d - Math.min(p.s.n, 200) / 1000, p.s]);
+  }
+  fuzzy.sort((a, b) => a[0] - b[0]);
+  return fuzzy.slice(0, limit).map((r) => r[1]);
+}
+
+function scoreSeries(prepared, nq) {
   const qt = nq.split(" ");
+  const cq = compactKey(qt.filter((t) => !/^(19|20)\d\d$/.test(t)).join(" "));
   const years = qt.filter((t) => /^(19|20)\d\d$/.test(t)).map(Number);
   const words = qt.filter((t) => !/^(19|20)\d\d$/.test(t));
   const res = [];
@@ -236,6 +281,8 @@ export async function searchSeries(q, limit = 40) {
       score += p.toks[i] === w ? 3 : 1;
       if (i === 0) score += 1;
     }
+    // "xmen" / "spiderman": compare with spaces and punctuation removed
+    if (!ok && cq.length >= 3 && p.c.includes(cq)) { ok = true; score = p.c === cq ? 8 : p.c.startsWith(cq) ? 4 : 1; }
     if (!ok) continue;
     const joined = words.join(" ");
     if (p.n === joined) score += 20;
@@ -246,7 +293,7 @@ export async function searchSeries(q, limit = 40) {
     res.push([score, p.s]);
   }
   res.sort((a, b) => b[0] - a[0] || (b[1].y || 0) - (a[1].y || 0));
-  return res.slice(0, limit).map((r) => r[1]);
+  return res;
 }
 
 // ---------- local storage (per device) ----------

@@ -15,6 +15,10 @@ const cases = {
   "Giant-Size X-Men: Storm (2020) #1": { title: "Giant-Size X-Men: Storm", year: 2020, a: 1, b: 1 },
   "Avengers (1963) #4.1": { title: "Avengers", year: 1963, a: 4.1, b: 4.1 },
   "Just some text": null,
+  "X-Men #1 (2019)": { title: "X-Men", year: 2019, a: 1, b: 1 },
+  "New Mutants #1 (2019)": { title: "New Mutants", year: 2019, a: 1, b: 1 },
+  "Fallen Angels #2-6 (2019)": { title: "Fallen Angels", year: 2019, a: 2, b: 6 },
+  "X-Men 2099 #1 (1993)": { title: "X-Men 2099", year: 1993, a: 1, b: 1 },
 };
 for (const [line, want] of Object.entries(cases)) {
   const got = parseLine(line);
@@ -29,3 +33,13 @@ const code = await encodeList(list);
 assert.equal(code[0], "2");
 assert.deepEqual(await decodeList(code), list);
 console.log("ok", code.length, "chars for 3 items");
+
+// spelling-insensitive keys and typo distance
+import { compactKey, editDistance, typoBudget } from "../public/js/lib.js";
+assert.equal(compactKey("xmen"), compactKey("X-Men"));
+assert.equal(compactKey("Amazing Spiderman"), compactKey("The Amazing Spider-Man"));
+assert.equal(editDistance("maruaders", "marauders", 1), 1);
+assert.equal(editDistance("wolverene", "wolverine", 1), 1);
+assert.equal(editDistance("hulk", "hawkeye", 1), 2);
+assert.equal(typoBudget("xmen"), 0);
+console.log("ok spelling");
