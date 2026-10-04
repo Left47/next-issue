@@ -1,7 +1,7 @@
 // List viewer: numbered checklist, one-tap app links, progress, jump to next.
 import { h, $, appLink, coverUrl, issueName, copyText, toast, readMarks, resolveIds, loadSeries, CG } from "./lib.js";
 
-export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare, featured } = {}) {
+export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare, featured, by } = {}) {
   const ids = list.sections.flatMap((s) => s.items.filter((i) => i.id != null).map((i) => i.id));
   const issues = await resolveIds(ids);
   const marks = readMarks.get();
@@ -135,7 +135,8 @@ export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare
 
   root.replaceChildren(
     h("header", { class: "list-head" },
-      featured && h("p", { class: "eyebrow" }, "Featured list"),
+      featured ? h("p", { class: "eyebrow" }, "Featured list",
+        by ? [" · by ", h("a", { href: by.url, target: "_blank", rel: "noopener" }, by.name)] : "") : "",
       h("h1", {}, list.title || "Untitled list"),
       list.desc && h("p", { class: "lede" }, list.desc),
       h("div", { class: "head-acts" },

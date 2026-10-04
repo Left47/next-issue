@@ -4,8 +4,15 @@ import { renderView } from "./view.js";
 import { renderEditor } from "./edit.js";
 
 const app = $("#app");
+// by: credit for lists made by other readers (shown on the card and the list page)
+const PHOENIX = { name: "PhoenixML", url: "https://www.reddit.com/user/PhoenixML/" };
 const FEATURED = [
   { id: "dawn-of-x", title: "Dawn of X", blurb: "House of X / Powers of X through X of Swords, issue by issue." },
+  { id: "annihilation", title: "Annihilation", blurb: "Cosmic Saga part 1. Follows the omnibus.", by: PHOENIX },
+  { id: "annihilation-conquest", title: "Annihilation: Conquest", blurb: "Cosmic Saga part 2. Follows the omnibus.", by: PHOENIX },
+  { id: "road-to-war-of-kings", title: "Road to War of Kings", blurb: "Cosmic Saga part 3. Follows the omnibus.", by: PHOENIX },
+  { id: "war-of-kings", title: "War of Kings", blurb: "Cosmic Saga part 4. Tie-ins placed in reading order.", by: PHOENIX },
+  { id: "realm-of-kings", title: "Realm of Kings", blurb: "Cosmic Saga part 5. Follows the omnibus.", by: PHOENIX },
 ];
 
 function go(hash) {
@@ -68,6 +75,7 @@ async function showFeatured(id) {
   app.className = "wrap";
   await renderView(app, list, {
     featured: true,
+    by: FEATURED.find((f) => f.id === id)?.by,
     onShare: () => shareLink(`${location.origin}${location.pathname}#f=${id}`, list.title),
     onCopyEdit: () => newDraft(structuredClone(list)),
   });
@@ -176,7 +184,8 @@ function home() {
     h("section", {},
       h("h2", {}, "Featured"),
       h("ul", { class: "cards" }, FEATURED.map((f) => h("li", { class: "card" },
-        h("a", { href: `#f=${f.id}`, class: "card-main" }, h("b", {}, f.title), h("span", { class: "meta" }, f.blurb)))))),
+        h("a", { href: `#f=${f.id}`, class: "card-main" }, h("b", {}, f.title), h("span", { class: "meta" }, f.blurb),
+          f.by ? h("span", { class: "meta by" }, `by ${f.by.name}`) : ""))))),
 
     h("section", { class: "how" },
       h("h2", {}, "How it works"),
