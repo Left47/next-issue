@@ -147,8 +147,8 @@ function home() {
 
   app.replaceChildren(h("div", { class: "home-in" },
     h("header", { class: "hero" },
-      h("p", { class: "eyebrow" }, "Unofficial companion for Marvel Unlimited subscribers"),
-      h("h1", { class: "hero-h" }, "Build & share ", h("span", { class: "nw" }, "Marvel reading lists")),
+      h("p", { class: "eyebrow" }, "Unofficial companion site"),
+      h("h1", { class: "hero-h" }, "Shareable reading lists ", h("span", { class: "nw" }, "for Marvel Unlimited")),
       h("p", { class: "subhead" }, "Always read the right ", h("span", { class: "wm" }, "Next ", h("span", {}, "Issue"))),
       h("p", { class: "lede" }, "Search the comics, put the issues in reading order, and send the link. Every issue opens straight in the Marvel Unlimited app with one tap. No account needed."),
       h("div", { class: "cta" },
