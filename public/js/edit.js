@@ -120,7 +120,19 @@ export async function renderEditor(root, list, draftId, { onPreview, onDetails }
     secWrap.lastElementChild?.querySelector(".sec-name")?.focus();
   } }, "+ Section");
 
-  listPane.append(details, secWrap, h("div", { class: "pane-foot" }, addSecBtn));
+  // escape hatch for a bad paste import: wipe issues and sections, keep title + description
+  const clearBtn = h("button", { class: "btn danger", type: "button", onclick: () => {
+    const n = list.sections.reduce((a, s) => a + s.items.length, 0);
+    const secs = list.sections.length;
+    const what = `${n} issue${n === 1 ? "" : "s"}${secs > 1 ? ` and ${secs} sections` : ""}`;
+    if (!confirm(`Remove all ${what} from "${list.title || "this list"}"?\n\nYour title and description stay. This can't be undone.`)) return;
+    list.sections = [{ name: "", desc: "", items: [] }];
+    target = 0;
+    save(); drawList(); drawTargets(); refreshTiles();
+    toast("All issues removed");
+  } }, "Remove all issues");
+
+  listPane.append(details, secWrap, h("div", { class: "pane-foot" }, addSecBtn, clearBtn));
 
   // ---------- add pane ----------
   const addPane = h("div", { class: "pane ed-add", id: "pane-add" });
@@ -260,6 +272,7 @@ export async function renderEditor(root, list, draftId, { onPreview, onDetails }
   const count = h("span", { class: "badge" });
   function updateCounts() {
     const n = list.sections.reduce((a, s) => a + s.items.length, 0);
+    clearBtn.hidden = !n && list.sections.length < 2;
     count.textContent = n;
   }
   const tabs = h("nav", { class: "tabbar", "aria-label": "Editor" },

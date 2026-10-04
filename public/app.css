@@ -159,7 +159,7 @@ body.editing { padding-bottom: calc(64px + var(--safe-b)); }
 .chosen { box-shadow: 0 6px 20px rgb(0 0 0 / .18); }
 .add-here { margin-top: 6px; width: 100%; min-height: 40px; }
 .add-here.on { color: var(--muted); }
-.pane-foot { margin-top: 14px; }
+.pane-foot { margin-top: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; }
 
 .add-top { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-bottom: 12px; }
 .segs { display: inline-flex; border: 1px solid var(--line); border-radius: var(--radius); padding: 2px; background: var(--surface); }
