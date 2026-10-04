@@ -35,7 +35,6 @@ Unofficial. Not affiliated with Marvel. Readers need their own Marvel Unlimited 
 | `data/cg/pages.txt` | Continuity Guide pages to read when refreshing issue labels. |
 | `.github/workflows/` | Weekly catalog update, and the Pages deploy |
 | `tests/` | Unit tests for the paste parser, link codec, and spelling matching |
-| `docs/` | The original project brief and the Dawn of X prototype page |
 
 ## Links
 

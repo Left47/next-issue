@@ -528,25 +528,6 @@ def update():
     build()
 
 
-def import_handoff():
-    """Seed legacy.jsonl from the original handoff scan."""
-    p = ROOT / "data" / "mu_catalog_scan.jsonl"
-    cov = json.load(open(ROOT / "data" / "scan_coverage.json"))
-    have = set(legacy_state())
-    found = set()
-    with open(RAW / "legacy.jsonl", "a") as f:
-        for line in open(p):
-            r = json.loads(line)
-            found.add(r["digital_id"])
-            if r["digital_id"] not in have:
-                f.write(json.dumps({"digital_id": r["digital_id"], "source_id": r["source_id"], "drn": r["drn"], "title": r["title"]}) + "\n")
-        errs = set(cov.get("unresolved_request_errors", []))
-        for a, b in cov["ranges_scanned"]:
-            for d in range(a, b + 1):
-                if d not in found and d not in have:
-                    f.write(json.dumps({"digital_id": d, **({"error": True} if d in errs else {"missing": True})}) + "\n")
-
-
 if __name__ == "__main__":
     cmd = sys.argv[1] if len(sys.argv) > 1 else "help"
     if cmd == "scan":
@@ -565,7 +546,5 @@ if __name__ == "__main__":
         build()
     elif cmd == "update":
         update()
-    elif cmd == "import":
-        import_handoff()
     else:
         print(__doc__)
