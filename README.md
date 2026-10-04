@@ -4,6 +4,18 @@ A free, no-accounts website for building comic reading lists and sharing them as
 
 Unofficial. Not affiliated with Marvel. Readers need their own Marvel Unlimited subscription; this only makes the subscription easier to use. If Marvel adds shareable reading lists to the app, this site should retire.
 
+**Live at [nextissue.in](http://nextissue.in)**
+
+## Features
+
+- **One-tap open in Marvel Unlimited.** Every issue opens straight to that issue in the app. Issues without a direct link get a Copy button for the title.
+- **Lists live entirely in the link.** The whole list (title, sections, notes, issue order) is compressed into the URL. No accounts, no sign-in, no server database. Anyone with the link sees the same list, and a 131-issue list fits in about 700 characters.
+- **Progress tracking.** A sticky "Next issue in <list>" bar always shows where you are, with a Read button. Tapping Read marks the issue and moves you on. Checkmarks are saved on your device and carry across lists, so an issue you read in one list shows as read in every other.
+- **Fast list building.** Search the Marvel Unlimited catalog by series, tap covers to add issues, add a whole range (#1–12) at once, or paste an existing reading order as text (`Marauders (2019) #1-6`, one per line).
+- **Real reading orders, not just pull lists.** Sections, notes per issue, optional side-reads, and drag-to-reorder for interleaved events and crossovers.
+- **Phone- and tablet-first.** Built for reading on the device that has the app: large tap targets, a bottom tab bar on phones, a two-pane editor on tablets, the native share sheet, and add-to-home-screen.
+- **Free, with a catalog that keeps up.** Static site with no running costs. The catalog refreshes weekly to pick up new releases.
+
 ## Layout
 
 | Path | What |
