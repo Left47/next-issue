@@ -5,9 +5,12 @@ import { renderEditor } from "./edit.js";
 
 const app = $("#app");
 // by: credit for lists made by other readers (shown on the card and the list page)
+// from: credit for a published reading order a list is based on
+// (The Gotham Archives' domain has since changed hands, so this points at the archived page)
+const GOTHAM = { name: "The Gotham Archives", url: "https://web.archive.org/web/20220630005853/https://thegothamarchives.com/reading-orders/dawn-of-x-reading-order/" };
 const PHOENIX = { name: "PhoenixML", url: "https://www.reddit.com/user/PhoenixML/" };
 const FEATURED = [
-  { id: "dawn-of-x", title: "Dawn of X", blurb: "House of X / Powers of X through X of Swords, issue by issue." },
+  { id: "dawn-of-x", title: "Dawn of X", blurb: "House of X / Powers of X through X of Swords, issue by issue.", from: GOTHAM },
   { id: "annihilation", title: "Annihilation", blurb: "Cosmic Saga part 1. Follows the omnibus.", by: PHOENIX },
   { id: "annihilation-conquest", title: "Annihilation: Conquest", blurb: "Cosmic Saga part 2. Follows the omnibus.", by: PHOENIX },
   { id: "road-to-war-of-kings", title: "Road to War of Kings", blurb: "Cosmic Saga part 3. Follows the omnibus.", by: PHOENIX },
@@ -76,6 +79,7 @@ async function showFeatured(id) {
   await renderView(app, list, {
     featured: true,
     by: FEATURED.find((f) => f.id === id)?.by,
+    from: FEATURED.find((f) => f.id === id)?.from,
     onShare: () => shareLink(`${location.origin}${location.pathname}#f=${id}`, list.title),
     onCopyEdit: () => newDraft(structuredClone(list)),
   });
@@ -185,7 +189,8 @@ function home() {
       h("h2", {}, "Featured"),
       h("ul", { class: "cards" }, FEATURED.map((f) => h("li", { class: "card" },
         h("a", { href: `#f=${f.id}`, class: "card-main" }, h("b", {}, f.title), h("span", { class: "meta" }, f.blurb),
-          f.by ? h("span", { class: "meta by" }, `by ${f.by.name}`) : ""))))),
+          f.by ? h("span", { class: "meta by" }, `by ${f.by.name}`) : "",
+          f.from ? h("span", { class: "meta by" }, `order from ${f.from.name}`) : ""))))),
 
     h("section", { class: "how" },
       h("h2", {}, "How it works"),
