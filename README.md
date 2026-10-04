@@ -4,7 +4,7 @@ A free website for building comic reading lists and sharing them as links. Every
 
 Unofficial. Not affiliated with Marvel. Readers need their own Marvel Unlimited subscription; this only makes the subscription easier to use. If Marvel adds shareable reading lists to the app, this site should retire.
 
-**Live at [nextissue.in](http://nextissue.in)**
+**Live at [nextissue.in](https://nextissue.in)**
 
 ## Features
 
