@@ -37,6 +37,8 @@ export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare
           it.note && h("span", { class: "note" }, it.note),
           !iss && h("span", { class: "note" }, "No direct link. Tap Copy, then paste the title into the app's search.")),
         act);
+      // what the "Next issue in <list>" bar needs to show and open this issue
+      li._next = { title, href: iss ? appLink(iss) : null, cover: iss?.cover, markRead: () => { box.checked = true; setRead(li, key, true); } };
       rows.push(li);
       return li;
     });
@@ -76,12 +78,39 @@ export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare
     li.classList.toggle("done", on);
     update();
   }
+  // sticky "Next issue in <list>" bar
+  const listName = list.title || "this list";
+  const unThumb = h("span", { class: "un-thumb" });
+  const unTitle = h("span", { class: "un-title" });
+  const unLabel = h("span", { class: "un-label" });
+  const unAct = h("span", { class: "un-act" });
+  const upNext = h("div", { class: "up-next" },
+    unThumb,
+    h("button", { class: "un-text", type: "button", onclick: () => jump(), title: "Scroll to it in the list" }, unLabel, unTitle),
+    unAct);
+
   function update() {
     const done = rows.filter((r) => r.classList.contains("done")).length;
     fill.style.width = rows.length ? `${(100 * done) / rows.length}%` : "0";
     count.textContent = `${done} / ${rows.length}`;
     rows.forEach((r) => r.classList.remove("next"));
-    rows.find((r) => !r.classList.contains("done"))?.classList.add("next");
+    const next = rows.find((r) => !r.classList.contains("done"));
+    next?.classList.add("next");
+    upNext.classList.toggle("finished", !next);
+    if (!next) {
+      unLabel.replaceChildren("You finished ", h("b", {}, listName));
+      unTitle.textContent = rows.length ? `All ${rows.length} issues read.` : "No issues yet.";
+      unThumb.replaceChildren();
+      unAct.replaceChildren();
+      return;
+    }
+    const nx = next._next;
+    unLabel.replaceChildren("Next issue in ", h("b", {}, listName));
+    unTitle.textContent = nx.title;
+    unThumb.replaceChildren(nx.cover ? h("img", { src: coverUrl(nx.cover, 120), alt: "", width: 32, height: 48, referrerpolicy: "no-referrer" }) : "");
+    unAct.replaceChildren(nx.href
+      ? h("a", { class: "btn primary", href: nx.href, target: "_blank", rel: "noopener", onclick: () => { nx.markRead(); returning = true; } }, "Read")
+      : h("button", { class: "btn primary", type: "button", onclick: () => copyText(nx.title, "Title copied: paste it into the app's search") }, "Copy"));
   }
   // coming back from the Marvel app after tapping Read: bring the next issue into view
   let returning = false;
@@ -111,10 +140,11 @@ export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare
         onEdit && h("button", { class: "btn", type: "button", onclick: onEdit }, "Edit"),
         onCopyEdit && h("button", { class: "btn", type: "button", onclick: onCopyEdit }, "Copy & edit"))),
     h("div", { class: "bar" },
-      h("div", { class: "meter", "aria-hidden": "true" }, fill),
-      count,
-      h("button", { class: "btn primary", type: "button", onclick: jump }, "Jump to next"),
-      hideBtn),
+      upNext,
+      h("div", { class: "bar-row" },
+        h("div", { class: "meter", "aria-hidden": "true" }, fill),
+        count,
+        hideBtn)),
     ...sections,
     h("footer", { class: "foot" },
       h("p", {}, "Tap Read to open the issue in the Marvel Unlimited app (you need your own subscription). Checkmarks are saved on this device only.",
