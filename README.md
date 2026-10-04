@@ -41,8 +41,7 @@ Unofficial. Not affiliated with Marvel. Readers need their own Marvel Unlimited 
 ## Data sources and credit
 
 - Issue IDs come from Marvel's share service (`share.marvel.com/sharing/legacy/<digital_id>/raw` and `/sharing/issue/<drn>/raw`).
-- Series names and years come first from [Continuity Guide](https://www.continuityguide.net), whose issue labels ("X-Men (2019) #1") anchor the series grouping. The site links back to their reading orders. Their reading orders themselves aren't copied.
-- Series not covered by Continuity Guide get their name from the marvel.com issue page.
+- Series names and years come from [Continuity Guide](https://www.continuityguide.net) and marvel.com. Continuity Guide's issue labels ("X-Men (2019) #1") anchor the series grouping; marvel.com's name for an individual issue settles disagreements, and `data/aliases.json` merges runs that sources label inconsistently. The site links back to Continuity Guide's reading orders. Their reading orders themselves aren't copied.
 - Covers are hotlinked from `i.marvelfe.com` with `?w=` thumbnails, not re-hosted.
 
 ## Run locally
