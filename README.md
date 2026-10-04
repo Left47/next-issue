@@ -8,7 +8,7 @@ Unofficial. Not affiliated with Marvel. Readers need their own Marvel Unlimited 
 
 ## Features
 
-- **One-tap open in Marvel Unlimited.** Every issue opens straight to that issue in the app. Issues without a direct link get a Copy button for the title.
+- **One-tap open in Marvel Unlimited.** Every issue opens straight to that issue in the app, with its marvel.com page linked as a fallback. Issues without a direct link get a Copy button and a marvel.com search link.
 - **Lists live entirely in the link.** The whole list (title, sections, notes, issue order) is compressed into the URL. Nothing to sign up for on this site, and no server database. Anyone with the link sees the same list, and a 131-issue list fits in about 700 characters.
 - **Progress tracking.** A sticky "Next issue in <list>" bar always shows where you are, with a Read button. Tapping Read marks the issue and moves you on. Checkmarks are saved on your device and carry across lists, so an issue you read in one list shows as read in every other.
 - **Fast list building.** Search the Marvel Unlimited catalog by series, tap covers to add issues, add a whole range (#1–12) at once, or paste an existing reading order as text (`Marauders (2019) #1-6`, one per line).

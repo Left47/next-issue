@@ -53,6 +53,15 @@ export function appLink(it) {
   return `https://marvel.smart.link/fiir7ec77?type=issue&drn=${DRN}${it.drn}&sourceId=${it.src ?? ""}`;
 }
 
+// The issue's page on marvel.com, from its Marvel catalog ID (a fallback when the app won't open it)
+export function webLink(it) {
+  return it?.src ? `https://www.marvel.com/comics/issue/${it.src}` : null;
+}
+
+export function webSearch(text) {
+  return `https://www.marvel.com/search?limit=20&query=${encodeURIComponent(text)}&offset=0&content_type=comics`;
+}
+
 export function coverUrl(path, w = 160) {
   return path ? `https://i.marvelfe.com/m/${path}?w=${w}` : "";
 }

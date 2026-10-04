@@ -1,5 +1,5 @@
 // List viewer: numbered checklist, one-tap app links, progress, jump to next.
-import { h, $, appLink, coverUrl, issueName, copyText, toast, readMarks, resolveIds, loadSeries, CG } from "./lib.js";
+import { h, $, appLink, webLink, webSearch, coverUrl, issueName, copyText, toast, readMarks, resolveIds, loadSeries, CG } from "./lib.js";
 
 export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare, featured, by } = {}) {
   const ids = list.sections.flatMap((s) => s.items.filter((i) => i.id != null).map((i) => i.id));
@@ -36,9 +36,11 @@ export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare
         h("span", { class: "t" },
           h("b", {}, title),
           it.opt && h("span", { class: "tag" }, "optional"),
-          iss?.date && h("span", { class: "meta" }, fmtDate(iss.date)),
+          iss ? h("span", { class: "meta" }, iss.date ? fmtDate(iss.date) : "",
+            !it.web && webLink(iss) ? [iss.date ? " · " : "", h("a", { class: "web", href: webLink(iss), target: "_blank", rel: "noopener" }, "marvel.com")] : "") : "",
           it.note && h("span", { class: "note" }, it.note),
-          !iss && !it.note && h("span", { class: "note" }, "No direct link. Tap Copy, then paste the title into the app's search.")),
+          !iss && h("span", { class: "note" }, it.note ? "" : "No direct link. Tap Copy, then paste the title into the app's search, or ",
+            h("a", { class: "web", href: webSearch(title), target: "_blank", rel: "noopener" }, it.note ? "Search marvel.com" : "search marvel.com"), it.note ? "" : ".")),
         act);
       // what the "Next issue in <list>" bar needs to show and open this issue
       li._next = { title, href: it.web || (iss ? appLink(iss) : null), web: !!it.web, cover: iss?.cover, markRead: () => { box.checked = true; setRead(li, key, true); } };
