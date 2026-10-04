@@ -69,7 +69,8 @@ h2 { font: 700 1.6rem/1 var(--display); text-transform: uppercase; letter-spacin
 /* ---------- home ---------- */
 .hero { padding: 12px 0 8px; }
 .hero h1 span { color: var(--accent); }
-.hero-h { max-width: 16ch; }
+.hero-h .nw { white-space: nowrap; }
+@media (max-width: 359px) { .hero-h .nw { white-space: normal; } }
 .subhead { font: 700 clamp(1.3rem, 5vw, 1.75rem)/1.1 var(--display); text-transform: uppercase; letter-spacing: .03em; color: var(--accent); margin: 10px 0 0; }
 .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
 .home section { margin-top: 36px; }
