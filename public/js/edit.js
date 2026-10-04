@@ -274,7 +274,7 @@ export async function renderEditor(root, list, draftId, { onPreview, onDetails }
           const good = q.cands.filter((c) => c.hits > 0), rest = q.cands.filter((c) => !c.hits);
           return h("fieldset", { class: "amb" },
             h("legend", {}, h("b", {}, q.fuzzy ? `"${q.title}": did you mean…?` : q.year ? `${q.title} (${q.year})` : q.title),
-              h("span", { class: "meta" }, `${q.year && !q.cands.some((c) => c.s.y === q.year) ? `No ${q.year} series found. ` : ""}Lines: ${q.lines.slice(0, 8).join(", ")}${q.lines.length > 8 ? "…" : ""}`)),
+              h("span", { class: "meta" }, `${q.year ? `No series clearly matches ${q.year} (as a start year or the issues' release year). ` : ""}Lines: ${q.lines.slice(0, 8).join(", ")}${q.lines.length > 8 ? "…" : ""}`)),
             good.map((c) => opt(q, i, c)),
             rest.length ? h("details", {}, h("summary", {}, `${rest.length} other series named "${q.title}" without these issues`), rest.map((c) => opt(q, i, c))) : "",
             h("label", { class: "amb-opt skip" },
@@ -401,10 +401,40 @@ const nums = (p) => {
 };
 
 async function hitsIn(sid, wanted) {
+  return (await matchIn(sid, wanted)).hits;
+}
+
+// how many wanted issue numbers a series has, and how many came out in a given year (exactly / within a year)
+async function matchIn(sid, wanted, year) {
   const s = await loadSeries(sid).catch(() => null);
-  if (!s) return 0;
-  const have = new Set(s.issues.filter((i) => i.num != null).map((i) => +i.num));
-  return wanted.filter((n) => have.has(n)).length;
+  const r = { hits: 0, pub: 0, near: 0 };
+  if (!s) return r;
+  const byNum = new Map(s.issues.filter((i) => i.num != null).map((i) => [+i.num, i]));
+  for (const n of wanted) {
+    const iss = byNum.get(n);
+    if (!iss) continue;
+    r.hits++;
+    const y = iss.date ? +iss.date.slice(0, 4) : null;
+    if (year && y === year) r.pub++;
+    if (year && y && Math.abs(y - year) <= 1) r.near++;
+  }
+  return r;
+}
+
+// A year on a line can mean when the series started ("X-Men (2019) #1") or when that issue
+// came out ("New Mutants #5 (2020)", common in reading guides). Returns the one series that
+// fits, or null if it's still ambiguous.
+async function pickByYear(cands, wanted, year) {
+  const m = await Promise.all(cands.map((c) => matchIn(c.id, wanted, year)));
+  const started = cands.filter((c, i) => c.y === year && m[i].hits > 0);
+  if (started.length === 1) return started[0];
+  for (const key of ["pub", "near"]) {
+    const best = Math.max(0, ...m.map((x) => x[key]));
+    if (!best) continue;
+    const top = cands.filter((_, i) => m[i][key] === best);
+    if (top.length === 1) return top[0];
+  }
+  return null;
 }
 
 export async function planImport(text) {
@@ -422,23 +452,34 @@ export async function planImport(text) {
     if (!p) { plan.push({ kind: "text", text: raw }); continue; }
 
     const L = lookup(p.title);
-    const all = L.cands;
     let fuzzy = L.fuzzy;
-    let cands = p.year ? all.filter((c) => c.y === p.year) : all;
-    if (!cands.length && p.alt) { const A = lookup(p.alt); cands = A.cands; fuzzy = A.fuzzy; } // "X-Men 2099 #1": the number was part of the title
-    if (!cands.length && p.year && all.length) cands = all; // year given but no series has it: ask
+    let cands = L.cands;
+    // "X-Men 2099 #1": the 4-digit number was part of the title, not a year
+    if (p.alt && !cands.some((c) => c.y === p.year)) {
+      const A = lookup(p.alt);
+      if (A.cands.length && !A.fuzzy) { cands = A.cands; fuzzy = false; p.title = p.alt; p.year = null; }
+    }
+    if (!cands.length) { plan.push({ kind: "issue", p, sid: null }); continue; }
+    const wanted = nums(p);
+
+    if (p.year && !fuzzy) {
+      const pick = await pickByYear(cands, wanted, p.year);
+      if (pick) {
+        plan.push({ kind: "issue", p, sid: pick.id });
+        if (pick.y) knownYears.push(pick.y);
+        continue;
+      }
+    }
     if (cands.length === 1 && !fuzzy) {
       plan.push({ kind: "issue", p, sid: cands[0].id });
       if (cands[0].y) knownYears.push(cands[0].y);
       continue;
     }
-    if (!cands.length) { plan.push({ kind: "issue", p, sid: null }); continue; }
 
     // several series share this title: if exactly one actually has these issues, take it
-    const wanted = nums(p);
     const hits = await Promise.all(cands.map((c) => hitsIn(c.id, wanted)));
     const withHits = cands.filter((_, i) => hits[i] > 0);
-    if (withHits.length === 1 && !fuzzy && !(p.year && withHits[0].y !== p.year)) {
+    if (withHits.length === 1 && !fuzzy) {
       plan.push({ kind: "issue", p, sid: withHits[0].id });
       if (withHits[0].y) knownYears.push(withHits[0].y);
       continue;
