@@ -147,9 +147,9 @@ function home() {
 
   app.replaceChildren(
     h("header", { class: "hero" },
-      h("p", { class: "eyebrow" }, "Unofficial companion for Marvel Unlimited subscribers"),
-      h("h1", {}, "Next issue in… ", h("span", {}, "your reading order.")),
-      h("p", { class: "lede" }, "Build a comic reading list issue by issue, put it in order, and share it as a link. Every issue opens straight in the Marvel Unlimited app with one tap. No account needed."),
+      h("p", { class: "eyebrow" }, "Unofficial companion site"),
+      h("h1", { class: "hero-h" }, "Build and share your reading lists with other Marvel Unlimited subscribers. ", h("span", {}, "Don't miss the next issue!")),
+      h("p", { class: "lede" }, "Search the comics, put the issues in reading order, and send the link. Every issue opens straight in the Marvel Unlimited app with one tap. No account needed."),
       h("div", { class: "cta" },
         h("button", { class: "btn primary big", type: "button", onclick: () => newDraft() }, "Start a list"),
         h("a", { class: "btn big", href: "#f=dawn-of-x" }, "See an example"))),
