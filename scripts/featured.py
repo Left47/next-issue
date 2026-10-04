@@ -11,7 +11,17 @@ src = json.load(open(ROOT / "data" / "dawn_of_x_reading_order.json"))
 by_drn = {r["drn"]: r for r in catalog.joined().values()}
 cg = {r["label"]: r["drn"] for r in catalog.read_jsonl("cg.jsonl")}
 
+# Issues whose only direct link is the wrong edition: keep them as copyable titles with a note.
+UNLINKED = {
+    "House of X #1": ("House of X (2019) #1",
+                      "The only direct link is the Director's Cut, which some subscribers see as locked. Tap Copy and search the app for the regular issue."),
+}
+
+
 def item(it):
+    if it["title"] in UNLINKED:
+        title, note = UNLINKED[it["title"]]
+        return [title, 1 if it.get("optional") else 0, note]
     d = it.get("digital_id")
     if not d:
         # e.g. House of X #1: find its DRN via Continuity Guide's label, then its digital id

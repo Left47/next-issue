@@ -35,7 +35,7 @@ export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare
           it.opt && h("span", { class: "tag" }, "optional"),
           iss?.date && h("span", { class: "meta" }, fmtDate(iss.date)),
           it.note && h("span", { class: "note" }, it.note),
-          !iss && h("span", { class: "note" }, "No direct link. Tap Copy, then paste the title into the app's search.")),
+          !iss && !it.note && h("span", { class: "note" }, "No direct link. Tap Copy, then paste the title into the app's search.")),
         act);
       // what the "Next issue in <list>" bar needs to show and open this issue
       li._next = { title, href: iss ? appLink(iss) : null, cover: iss?.cover, markRead: () => { box.checked = true; setRead(li, key, true); } };
