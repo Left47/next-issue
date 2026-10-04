@@ -20,20 +20,26 @@ Unofficial. Not affiliated with Marvel. Readers need their own Marvel Unlimited 
 
 | Path | What |
 |---|---|
-| `public/` | The static site (no build step). Deploy this folder. |
+| `public/` | The static site (no build step), deployed to GitHub Pages on every push |
+| `public/js/main.js` | Router, home page, and the list flow: details, add issues, preview & share |
 | `public/js/lib.js` | List codec (deflate + base64url in the URL hash), catalog data access, search, local storage |
-| `public/js/view.js` | List viewer: checkmarks, progress, jump to next, one-tap Read links |
+| `public/js/view.js` | List viewer: "Next issue in <list>" bar, checkmarks, progress, one-tap Read links |
 | `public/js/edit.js` | Editor: series search, issue grid, ranges, sections, drag reorder (SortableJS), notes, paste import |
 | `public/data/` | Generated catalog: `series.json` (search index), `s/<series>.json`, `d/<digital_id // 1000>.json` (ID lookup) |
 | `public/lists/` | Featured lists (compact list JSON) |
 | `scripts/catalog.py` | Catalog pipeline (scan, enrich, cg, names, build, update) |
 | `scripts/pipeline.sh` | Full resumable catalog build |
+| `scripts/featured.py` | Builds the featured Dawn of X list |
 | `data/raw/` | Append-only JSONL from the pipeline (source of truth for rebuilds) |
+| `data/aliases.json` | Series name fixes for runs that sources label inconsistently |
 | `data/cg/pages.txt` | Continuity Guide pages to read when refreshing issue labels. |
+| `.github/workflows/` | Weekly catalog update, and the Pages deploy |
+| `tests/` | Unit tests for the paste parser, link codec, and spelling matching |
+| `docs/` | The original project brief and the Dawn of X prototype page |
 
 ## Links
 
-- Share link: `#l=<code>`, where code is `1` + base64url(deflate-raw(JSON)). The list is entirely in the URL.
+- Share link: `#l=<code>`, where code is `2` + base64url(deflate-raw(JSON)), with each issue ID stored as the difference from the previous one. Older `1` links (no deltas) still open. The list is entirely in the URL.
 - Draft (this device): `#d=<id>`. Preview: `#p=<id>`. Featured: `#f=<name>`.
 - App link per issue: `https://marvel.smart.link/fiir7ec77?type=issue&drn=<DRN>&sourceId=<SOURCE_ID>`
 - **Digital IDs inside shared links must stay stable forever.**
@@ -48,6 +54,7 @@ Unofficial. Not affiliated with Marvel. Readers need their own Marvel Unlimited 
 
 ```
 python3 -m http.server 8787 --directory public
+node tests/unit.mjs
 ```
 
 ## Rebuild the catalog
