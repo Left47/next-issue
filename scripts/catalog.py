@@ -279,6 +279,33 @@ def names():
     THREADS, RATE = min(THREADS, 4), min(RATE, 2)  # marvel.com is a real website; go gently
     run_pool(marvel_name, todo, "names.jsonl", "names")
 
+    # then check individual issues that look misplaced, until nothing new turns up
+    recs = joined()
+    for _ in range(3):
+        nm = marvel_names()
+        series = assemble(recs, nm, cgn)
+        todo = sorted((duplicate_suspects(series, cgn, nm) | early_suspects(series, cgn, nm)) - have)
+        print(f"names: {len(todo)} misplaced-looking issues to look up", file=sys.stderr)
+        if not todo:
+            break
+        run_pool(marvel_name, todo, "names.jsonl", "names")
+        have |= set(todo)
+
+
+def early_suspects(series, cgn, nm):
+    """source_ids of unconfirmed issues released well before the first Continuity Guide-confirmed
+    issue of their series (e.g. a reprint of an old #1 sitting in a new volume)."""
+    out = set()
+    for s in series.values():
+        anchored = [r["issued"] for r in s["recs"] if r["drn"] in cgn and r["issued"]]
+        if not anchored:
+            continue
+        start = _days(min(anchored)) - 62
+        for r in s["recs"]:
+            if r["drn"] not in cgn and r["issued"] and _days(r["issued"]) < start and r.get("source_id") and r["source_id"] not in nm:
+                out.add(r["source_id"])
+    return out
+
 
 NAME_RE = re.compile(r"^(.*?)\s*\((\d{4})\)\s*(?:#(\S+))?\s*$")
 
@@ -341,18 +368,27 @@ def fmt_num(n):
     return str(int(f)) if f.is_integer() else str(f)
 
 
-def build():
-    recs = joined()
-    nm = {}
-    for r in read_jsonl("names.jsonl"):
-        if not r.get("error"):
-            nm[r["source_id"]] = r
-    vols = cluster(recs)
-    cgn = cg_names()
+def marvel_names():
+    return {r["source_id"]: r for r in read_jsonl("names.jsonl") if not r.get("error") and r.get("name")}
 
-    # resolve each volume's display name + year, then merge volumes that resolve to the same marvel.com series
+
+def assemble(recs, nm, cgn):
+    """Group records into named series: {key: {title, year, mseries, recs, cg}}.
+
+    Naming priority per issue: Continuity Guide label > marvel.com name for that issue >
+    the heuristic volume's name (from a representative issue, or its earliest year).
+    """
     series = {}
-    for v in vols:
+
+    def add(base, year, rs, pages, mseries=None):
+        if not rs:
+            return
+        key = f"{base.lower()}|{year}"
+        s = series.setdefault(key, {"title": base, "year": year, "mseries": mseries, "recs": [], "cg": set()})
+        s["recs"].extend(rs)
+        s["cg"].update(pages)
+
+    for v in cluster(recs):
         rs = v["recs"]
         name_rec = None
         for r in sorted(rs, key=lambda r: (r["num"] is None, r["num"] or 0)):
@@ -367,11 +403,43 @@ def build():
             if not year:
                 ys = [year_of(r["issued"]) for r in part if r["issued"]]
                 year = min(ys) if ys else None
-            key = f"{base.lower()}|{year}"
-            s = series.setdefault(key, {"title": base, "year": year, "mseries": name_rec and name_rec.get("series_id"),
-                                        "recs": [], "cg": set()})
-            s["recs"].extend(part)
-            s["cg"].update(pages)
+            # issues marvel.com names individually (and CG doesn't) go where marvel.com says,
+            # e.g. a 2019 digital re-release of X-Men (1963) #1 that clustered with X-Men (2019)
+            keep = []
+            for r in part:
+                own = nm.get(r.get("source_id"))
+                ob, oy = parse_name(own and own["name"])
+                if r["drn"] not in cgn and ob and oy and (ob.lower(), oy) != (base.lower(), year):
+                    add(ob, oy, [r], [], own.get("series_id"))
+                else:
+                    keep.append(r)
+            add(base, year, keep, pages, name_rec and name_rec.get("series_id"))
+    return series
+
+
+def duplicate_suspects(series, cgn, nm):
+    """source_ids of unconfirmed issues that share an issue number with another issue in the same series."""
+    out = set()
+    for s in series.values():
+        by = defaultdict(list)
+        for r in s["recs"]:
+            if r["num"] is not None:
+                by[float(r["num"])].append(r)
+        for rs in by.values():
+            if len(rs) > 1:
+                for r in rs:
+                    if r["drn"] not in cgn and r.get("source_id") and r["source_id"] not in nm:
+                        out.add(r["source_id"])
+    return out
+
+
+def build():
+    # only issues with details (number, date, cover); newly scanned ones join after the enrich step
+    enriched = {r["drn"] for r in read_jsonl("issues.jsonl")}
+    recs = {d: r for d, r in joined().items() if r["drn"] in enriched}
+    nm = marvel_names()
+    cgn = cg_names()
+    series = assemble(recs, nm, cgn)
 
     # stable-ish ids: slug of title + year, disambiguated
     used = set()
