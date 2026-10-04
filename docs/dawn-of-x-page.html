@@ -1,0 +1,224 @@
+<title>Dawn of X Reading Order</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: one narrow reading column; sticky progress header; issues as a numbered checklist grouped by phase */
+:root{
+  --bg:#eef2ec; --surface:#f8faf6; --fg:#16201a; --muted:#5d6b62; --line:#d3dccf;
+  --accent:#1d7048; --accent-soft:#d6eadc; --sword:#8a3a2e; --sword-soft:#f1ddd8;
+  --display:"Big Shoulders Display","Arial Narrow",Impact,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111814; --surface:#18211c; --fg:#e4ece5; --muted:#93a398; --line:#2a362f;
+  --accent:#5cc28a; --accent-soft:#1e3527; --sword:#e08a7b; --sword-soft:#3a2420; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111814; --surface:#18211c; --fg:#e4ece5; --muted:#93a398; --line:#2a362f;
+  --accent:#5cc28a; --accent-soft:#1e3527; --sword:#e08a7b; --sword-soft:#3a2420; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
+.wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:24px 64px}
+h1{font-family:var(--display);font-weight:900;font-size:clamp(2.6rem,9vw,4rem);line-height:.9;letter-spacing:.01em;text-transform:uppercase;margin:0;text-wrap:balance}
+h1 span{color:var(--accent)}
+.lede{color:var(--muted);max-width:60ch;margin:.75rem 0 0}
+.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:12px;margin-top:16px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.meter{flex:1 1 180px;height:8px;border-radius:4px;background:var(--line);overflow:hidden;min-width:0}
+.meter i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+.count{font-family:var(--mono);font-size:13px;font-variant-numeric:tabular-nums;color:var(--muted)}
+button{font:inherit;font-size:13px;font-weight:600;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:6px;padding:6px 10px;cursor:pointer}
+button:hover{border-color:var(--accent)}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+section{margin-top:32px}
+h2{font-family:var(--display);font-weight:700;font-size:1.7rem;text-transform:uppercase;letter-spacing:.03em;margin:0;line-height:1}
+.phase{display:flex;flex-direction:column;gap:4px;margin-bottom:10px}
+.phase p{margin:0;color:var(--muted);font-size:14px;max-width:62ch}
+.swords h2{color:var(--sword)}
+ol{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+li{display:grid;grid-template-columns:2.6rem 1.4rem 1fr auto;align-items:center;gap:10px;padding:9px 4px;border-bottom:1px solid var(--line)}
+li .n{font-family:var(--mono);font-size:12px;color:var(--muted);text-align:right;font-variant-numeric:tabular-nums}
+li input{width:18px;height:18px;accent-color:var(--accent);margin:0;cursor:pointer}
+li .t{min-width:0}
+li .t b{font-weight:600}
+li .note{display:block;font-size:12.5px;color:var(--muted)}
+li .acts{display:flex;gap:6px;align-items:center}
+li .cp{font-size:13px;font-weight:600;padding:3px 9px;color:var(--accent);border-color:var(--accent);white-space:nowrap}
+.swords li .cp{color:var(--sword);border-color:var(--sword)}
+li a{font-size:13px;font-weight:600;color:var(--accent);text-decoration:none;white-space:nowrap;border:1px solid var(--accent);border-radius:5px;padding:3px 8px}
+li a:hover{background:var(--accent-soft)}
+.swords li a{color:var(--sword);border-color:var(--sword)}
+.swords li a:hover{background:var(--sword-soft)}
+li.done .t{color:var(--muted);text-decoration:line-through;text-decoration-color:var(--line)}
+li.opt .t b::after{content:"optional";font-family:var(--mono);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.06em;margin-left:8px;padding:1px 5px;border-radius:3px;background:var(--line);color:var(--muted);vertical-align:2px}
+li.next{background:var(--accent-soft)}
+body.hide-done li.done{display:none}
+.foot{margin-top:40px;font-size:13px;color:var(--muted);max-width:62ch}
+.foot a{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.meter i{transition:none}}
+@media (max-width:420px){li{grid-template-columns:2rem 1.3rem 1fr auto;gap:8px}}
+</style>
+
+<div class="wrap">
+  <h1>Dawn <span>of</span> X</h1>
+  <p class="lede">Issue-by-issue reading order from House of X / Powers of X through X of Swords. Tap Read to open the issue in the Marvel Unlimited app. House of X #1 and Incoming! #1 have no direct link; for those, tap Copy and paste the title into the app's search.</p>
+
+  <div class="bar">
+    <div class="meter" aria-hidden="true"><i id="fill"></i></div>
+    <span class="count" id="count">0 / 0</span>
+    <button class="primary" id="next" type="button">Jump to next</button>
+    <button id="hide" type="button" aria-pressed="false">Hide read</button>
+  </div>
+
+  <div id="list"></div>
+
+  <p class="foot">Order follows The Gotham Archives' Dawn of X reading order (as listed on Wikipedia), with three optional side reads added. New Mutants #1–12 runs two alternating arcs, so it's split by writer. Checkmarks are saved in this browser only. <button id="reset" type="button">Clear checkmarks</button></p>
+</div>
+
+<script>
+const M = "https://www.marvel.com/comics/issue/";
+const S = {
+  hox:["House of X","house_of_x_2019",2019], pox:["Powers of X","powers_of_x_2019",2019],
+  xm:["X-Men","x-men_2019",2019], mar:["Marauders","marauders_2019",2019], exc:["Excalibur","excalibur_2019",2019],
+  nm:["New Mutants","new_mutants_2019",2019], xf:["X-Force","x-force_2019",2019], fa:["Fallen Angels","fallen_angels_2019",2019],
+  wol:["Wolverine","wolverine_2020",2020], cab:["Cable","cable_2020",2020], hel:["Hellions","hellions_2020",2020],
+  xfa:["X-Factor","x-factor_2020",2020], emp:["Empyre: X-Men","empyre_x-men_2020",2020]
+};
+const ID = {
+  hox:{1:72984,2:72985,3:72986,4:72987,5:72988,6:72989},
+  pox:{1:72991,2:72992,3:72993,4:72994,5:72995,6:72996},
+  xm:{1:76803,2:76804,3:76805,4:76806,5:76807,6:79944,7:79945,8:79946,9:79947,10:79948,11:79949,12:79950,13:84427,14:84428,15:84429},
+  mar:{1:76750,2:76751,3:76752,4:76753,5:76754,6:76755,7:78401,8:78402,9:78403,10:78404,11:78405,12:90080,13:90081,14:90082,15:90083},
+  exc:{1:76729,2:76730,3:76731,4:76732,5:76733,6:76734,7:78388,8:78389,9:78390,10:78391,11:78392,12:84380,13:84381,14:84382,15:84383},
+  nm:{1:76757,2:76758,3:76759,4:76760,5:76761,6:76762,7:76763,8:76764,9:76765,10:76766,11:76767,12:76768,13:90449},
+  xf:{1:76789,2:76790,3:76791,4:76792,5:76793,6:76794,7:76795,8:76796,9:76797,10:76798,11:76799,12:76800,13:90131,14:90132},
+  fa:{1:76742,2:76743,3:76744,4:76745,5:76746,6:76747},
+  wol:{1:78724,2:78725,3:78726,4:78727,5:78728,6:78729,7:78730},
+  cab:{1:78653,2:78654,3:78655,4:78656,5:78657,6:78658},
+  hel:{1:85938,2:85940,3:85942,4:85943,5:85944,6:85945},
+  xfa:{1:78746,2:78747,3:78748,4:78749},
+  emp:{1:88646,2:88647,3:88648,4:88649}
+};
+const one = (title, url, extra={}) => {
+  const m = title.match(/^(.*?) #(\d+)$/);
+  const copy = extra.copy || (m && !/\(\d{4}\)/.test(m[1]) ? `${m[1]} (2020) #${m[2]}` : title);
+  return [{title, url, ...extra, copy}];
+};
+function run(k, nums, extra={}){
+  return nums.map(n => ({title:`${S[k][0]} #${n}`, copy:`${S[k][0]} (${S[k][2]}) #${n}`, url:`${M}${ID[k][n]}/${S[k][1]}_${n}`, ...extra}));
+}
+const r = (a,b) => Array.from({length:b-a+1},(_,i)=>a+i);
+const search = q => "https://www.marvel.com/search?limit=20&query=" + encodeURIComponent(q) + "&offset=0&content_type=comics";
+
+const PHASES = [
+ {name:"House of X / Powers of X", blurb:"The foundation. Read the two minis interleaved in this exact order.", items:[
+   ...run("hox",[1]),...run("pox",[1]),...run("hox",[2]),...run("pox",[2,3]),...run("hox",[3,4]),...run("pox",[4]),
+   ...run("hox",[5]),...run("pox",[5]),...run("hox",[6]),...run("pox",[6])]},
+ {name:"Dawn of X", blurb:"Krakoa's first year across the whole line.", items:[
+   ...run("xm",[1]),...run("mar",[1]),...run("exc",[1]),
+   ...run("nm",[1,2,5,7],{note:"Hickman's space arc"}),
+   ...run("nm",[3,4,6],{note:"Brisson's Earth arc"}),
+   ...run("xf",[1]),...run("fa",r(1,6)),...run("xm",[2,3]),
+   ...one("Incoming! #1", search("Incoming! (2019) #1"), {opt:true, copy:"Incoming! (2019) #1", note:"Hickman Mr. Sinister short"}),
+   ...run("wol",r(1,3)),...run("mar",r(2,6)),...run("xf",[2,3]),...run("exc",r(2,6)),...run("xf",[4,5]),
+   ...run("xm",r(4,6)),
+   ...one("X-Men/Fantastic Four #1", M+"77993/x-menfantastic_four_2020_1", {opt:true}),
+   ...one("X-Men/Fantastic Four #2", M+"77995/x-menfantastic_four_2020_2", {opt:true}),
+   ...one("X-Men/Fantastic Four #3", M+"77996/x-menfantastic_four_2020_3", {opt:true}),
+   ...one("X-Men/Fantastic Four #4", M+"77997/x-menfantastic_four_2020_4", {opt:true}),
+   ...run("xf",[6]),...run("mar",r(7,10)),...run("xf",[7,8]),
+   ...one("Giant-Size X-Men: Jean Grey & Emma Frost #1", M+"82527/giant-size_x-men_jean_grey_and_emma_frost_2020_1"),
+   ...run("exc",[7,8]),...run("nm",[8]),...run("cab",r(1,4)),...run("wol",[4,5]),...run("nm",r(9,12)),
+   ...run("xm",r(7,9)),...run("xf",[9,10]),
+   ...one("Giant-Size X-Men: Nightcrawler #1", M+"82506/giant-size_x-men_nightcrawler_2020_1"),
+   ...run("hel",r(1,4)),
+   ...one("Giant-Size X-Men: Magneto #1", M+"82502/giant-size_x-men_magneto_2020_1"),
+   ...run("emp",r(1,4)),...run("xm",[10,11]),...run("xfa",r(1,3)),
+   ...one("Giant-Size X-Men: Fantomex #1", M+"82526/giant-size_x-men_fantomex_2020_1"),
+   ...run("mar",[11,12]),...run("xf",[11,12]),
+   ...one("Giant-Size X-Men: Storm #1", M+"82514/giant-size_x-men_storm_2020_1"),
+   ...run("exc",r(9,12)),...run("xm",[12]),
+   ...one("Free Comic Book Day: X-Men (2020) #1", M+"85662/free_comic_book_day_x-men_2020_1", {opt:true, note:"Short X of Swords prelude"})
+ ]},
+ {name:"X of Swords", cls:"swords", blurb:"The finale crossover. Every chapter, in order.", items:[
+   ...one("X of Swords: Creation #1", M+"84337/x_of_swords_creation_2020_1"),
+   ...run("xfa",[4]),...run("wol",[6]),...run("xf",[13]),...run("mar",[13]),...run("hel",[5]),...run("nm",[13]),
+   ...run("cab",[5]),...run("exc",[13]),...run("xm",[13]),
+   ...one("X of Swords: Stasis #1", M+"84338/x_of_swords_stasis_2020_1"),
+   ...run("xm",[14]),...run("mar",[14,15]),...run("exc",[14]),...run("wol",[7]),...run("xf",[14]),
+   ...run("hel",[6]),...run("cab",[6]),...run("xm",[15]),...run("exc",[15]),
+   ...one("X of Swords: Destruction #1", M+"84339/x_of_swords_destruction_2020_1")
+ ]}
+];
+
+// Marvel Unlimited's own "Open in Marvel Unlimited" link (from share.marvel.com), keyed by Marvel's issue number
+const DRN = {"72985":"drn:src:marvel:unison::prod:01097952-6ab2-46cb-9c51-d5105156c064","72986":"drn:src:marvel:unison::prod:aa58c741-3658-40ae-b9ef-393b7d1b794d","72987":"drn:src:marvel:unison::prod:6f3ee19a-1e62-4368-aa21-9e672a2bf2fb","72988":"drn:src:marvel:unison::prod:7b132dc0-17cd-489f-8417-222a8463548e","72989":"drn:src:marvel:unison::prod:ce22cbe2-cac7-4c10-a11c-12f50d8c8582","72991":"drn:src:marvel:unison::prod:4007758e-719c-4cd2-afe8-102206a95a38","72992":"drn:src:marvel:unison::prod:d906d74f-b485-4965-8105-a27383a60827","72993":"drn:src:marvel:unison::prod:6fa70df0-225b-4e82-ac62-ca3d91b76800","72994":"drn:src:marvel:unison::prod:a2cffcd1-237a-488a-9bc3-90a926b5bda3","72995":"drn:src:marvel:unison::prod:11a48834-0cf3-4be6-b189-741c2555835a","72996":"drn:src:marvel:unison::prod:a1fbd79e-40e7-42dd-b729-c30b32c1e4ff","76729":"drn:src:marvel:unison::prod:d5e73a80-dd3f-4a53-8567-20f803f42e2c","76730":"drn:src:marvel:unison::prod:55ab0bef-f125-4c97-8908-552afc404dca","76731":"drn:src:marvel:unison::prod:16d6fa0c-2cdd-470d-8464-20a4fd231220","76732":"drn:src:marvel:unison::prod:c7f65de3-6260-4e1f-8bd6-3a8a42c7883c","76733":"drn:src:marvel:unison::prod:82b2aeb8-f002-4629-87cf-686891d6e722","76734":"drn:src:marvel:unison::prod:9044ffd7-f817-4c08-bb63-5fad7a93aff5","76742":"drn:src:marvel:unison::prod:62952170-24dc-4686-b1a8-6b6d23ec785a","76743":"drn:src:marvel:unison::prod:15c999db-32ef-4689-a867-8b508d3db62d","76744":"drn:src:marvel:unison::prod:82e8b823-3ba0-43d3-ac0c-b719c1c51d17","76745":"drn:src:marvel:unison::prod:aeb021ef-4ac4-4899-8408-37d3da777a62","76746":"drn:src:marvel:unison::prod:45d4eda2-c3ff-4800-a2c6-5a00a6c7cd6c","76747":"drn:src:marvel:unison::prod:c66bf8f0-eb93-405e-8d3f-d29c4d4661f0","76750":"drn:src:marvel:unison::prod:9316b1d5-f1ca-4b5d-9429-80d8c1cfa570","76751":"drn:src:marvel:unison::prod:57f6f587-f69b-4a93-9320-9b0c3a4e2cc4","76752":"drn:src:marvel:unison::prod:4d8f07ea-c0a4-4273-a1c5-f747c51e4dd8","76753":"drn:src:marvel:unison::prod:00b90e86-047f-4688-a063-6ab096ddc528","76754":"drn:src:marvel:unison::prod:05e5ae32-3f41-48c5-b165-bc953b139452","76755":"drn:src:marvel:unison::prod:4930ed0c-86b8-4304-947a-2808d8654f29","76757":"drn:src:marvel:unison::prod:d78340fc-caea-4bf9-bd48-62106430da0a","76758":"drn:src:marvel:unison::prod:389af76a-1174-4220-a755-6007fcd34e75","76759":"drn:src:marvel:unison::prod:104b58e2-4f9b-444e-bb21-6f6f4a45da79","76760":"drn:src:marvel:unison::prod:4789eab1-6773-4e4d-926f-9ad2994bd5dc","76761":"drn:src:marvel:unison::prod:67722d05-6233-436c-9ebf-2bbb31081779","76762":"drn:src:marvel:unison::prod:a23c6c1e-8681-4fe0-ba5e-1ba18189a15c","76763":"drn:src:marvel:unison::prod:9beb27a8-4308-4a35-b7c8-18d1b2939ddb","76764":"drn:src:marvel:unison::prod:39a37838-7ad0-41cd-97c4-b661f003aae6","76765":"drn:src:marvel:unison::prod:8d3e5786-69e8-4e52-b2c4-03cba9275ef2","76766":"drn:src:marvel:unison::prod:1c175f7a-b4c0-48d9-836c-3c6ebfcaffb4","76767":"drn:src:marvel:unison::prod:c5dd503e-6341-4074-8445-cfbc2037621c","76768":"drn:src:marvel:unison::prod:2fa0f0ba-8bdd-4c52-bbe0-463286cda151","76789":"drn:src:marvel:unison::prod:79978cd0-5d01-4ca2-bdac-ca74a2e790f8","76790":"drn:src:marvel:unison::prod:d10088cd-379f-43fa-906f-3cff7aa25247","76791":"drn:src:marvel:unison::prod:815e606c-0f9a-4322-8f29-8152031e7eeb","76792":"drn:src:marvel:unison::prod:24643c2c-0f54-4c03-80ac-a8030ea456d5","76793":"drn:src:marvel:unison::prod:4f45d1db-80e1-494e-8860-c8aa84203b48","76794":"drn:src:marvel:unison::prod:fe4513c0-1796-4cbe-874d-bd0828ce2a57","76795":"drn:src:marvel:unison::prod:403371bc-52f6-4d1f-b9d2-25d49c56dcfd","76796":"drn:src:marvel:unison::prod:1f226aa1-6d1b-44ef-b521-ef90d5736a10","76797":"drn:src:marvel:unison::prod:5ffad203-3dfb-45a0-be09-11975d967eb3","76798":"drn:src:marvel:unison::prod:f181d425-aee8-4d5f-a86e-039a11b05aea","76799":"drn:src:marvel:unison::prod:d8d7c719-0517-4101-8599-ce848838dd63","76800":"drn:src:marvel:unison::prod:619b1910-99d9-43a2-9eb5-ea8b03b947c7","76803":"drn:src:marvel:unison::prod:b08e896a-8a3a-42f6-a805-104520b9a706","76804":"drn:src:marvel:unison::prod:b70f7589-f7b5-4460-8530-e9e4f5bdcc79","76805":"drn:src:marvel:unison::prod:4f6d6998-9e47-4686-ad76-f5681aec3689","76806":"drn:src:marvel:unison::prod:74ef2633-f788-4cf7-ad47-d22331a3a774","76807":"drn:src:marvel:unison::prod:78d1d89d-2897-4959-8ccf-1b28230c3412","77993":"drn:src:marvel:unison::prod:7a019c6c-73e0-457d-8a6e-13657325ec00","77995":"drn:src:marvel:unison::prod:f041fce4-280b-49b2-aa16-a42a1d40282b","77996":"drn:src:marvel:unison::prod:a7af8808-7255-40f8-8902-dcb18b15a9f7","77997":"drn:src:marvel:unison::prod:8e91e7f7-8d46-4ff7-9358-6c5eae5817fd","78388":"drn:src:marvel:unison::prod:9820d112-31bf-4235-b991-c63d57bdc6e7","78389":"drn:src:marvel:unison::prod:113889de-ffe2-4771-b2bf-58dbc9a4e7f2","78390":"drn:src:marvel:unison::prod:580c6087-fb25-4906-b8e0-540288881cf3","78391":"drn:src:marvel:unison::prod:be426fea-2d15-43e0-9e09-2c4148466adf","78392":"drn:src:marvel:unison::prod:aabf2cc3-412f-466c-ae96-5ca5e571e540","78401":"drn:src:marvel:unison::prod:46a6a858-772b-4468-92b5-55a74d61ec68","78402":"drn:src:marvel:unison::prod:54f1ac4b-a281-4867-bc62-918d08f19476","78403":"drn:src:marvel:unison::prod:4f57733c-83c1-45b3-9ca8-7bd39f999ef5","78404":"drn:src:marvel:unison::prod:5c8582c6-9244-4284-bf4e-0797b0a8f2d6","78405":"drn:src:marvel:unison::prod:562a9341-3bfa-409c-8f9f-637b17ffeaa7","78653":"drn:src:marvel:unison::prod:ea64f378-4872-4665-9dd4-0712d52450d7","78654":"drn:src:marvel:unison::prod:f82d2232-4e1c-4baa-90dd-b0a1fcbe03df","78655":"drn:src:marvel:unison::prod:d9009db8-9b82-46f7-95ef-c88d50076b74","78656":"drn:src:marvel:unison::prod:5f2a99ad-b695-4bcf-9d7c-2aa20952f711","78657":"drn:src:marvel:unison::prod:42e3a9a8-9836-4b66-bab6-caacb195c749","78658":"drn:src:marvel:unison::prod:2e385c87-0e4e-4f76-8715-444da49b6d6f","78724":"drn:src:marvel:unison::prod:b4512d00-5471-481c-addb-4e5673be7dff","78725":"drn:src:marvel:unison::prod:1de9c550-8d5a-4158-ba45-663b5e4ada96","78726":"drn:src:marvel:unison::prod:7811443b-aca1-4465-945a-78779a3987ef","78727":"drn:src:marvel:unison::prod:fb876173-6476-4ce8-81ba-263de00b7ca2","78728":"drn:src:marvel:unison::prod:8ab1cba4-7f11-4406-9210-8f068d887cba","78729":"drn:src:marvel:unison::prod:4794fa10-293a-4078-97c0-fd50efb9403d","78730":"drn:src:marvel:unison::prod:05e73c3e-404f-4b50-8bfb-d1a6dfaaf3ef","78746":"drn:src:marvel:unison::prod:c0008eba-ca8f-4057-a6b1-4db2a5528247","78747":"drn:src:marvel:unison::prod:53536695-99b0-4641-b598-2b6e9875cb84","78748":"drn:src:marvel:unison::prod:fc212139-06c2-4d02-a868-8045bc9544ef","78749":"drn:src:marvel:unison::prod:2126b64f-18de-4950-8510-aef6a54414ab","79944":"drn:src:marvel:unison::prod:49e86984-6186-4f6b-b17d-e66de7756a84","79945":"drn:src:marvel:unison::prod:675bcdb8-6a23-4a1f-b375-a700600ba889","79946":"drn:src:marvel:unison::prod:b9cdfb94-407a-475d-910a-776d6404ee4a","79947":"drn:src:marvel:unison::prod:dc2e9f2e-f683-49ad-9d53-91c624db3a05","79948":"drn:src:marvel:unison::prod:22f37fce-876c-492d-a414-9bbebdf1ebc1","79949":"drn:src:marvel:unison::prod:5ef82b52-0fa9-494e-9653-b7e7fffa7c10","79950":"drn:src:marvel:unison::prod:de9331b3-5551-405a-8a54-c58e0ace1a55","82502":"drn:src:marvel:unison::prod:600d75a4-ec46-464a-bf64-d203a500764c","82506":"drn:src:marvel:unison::prod:823ca87c-4aec-4ea5-924f-73adce7fa5d9","82514":"drn:src:marvel:unison::prod:25c027bb-ac9e-4ed3-bcb6-85314f0f600c","82526":"drn:src:marvel:unison::prod:f50c3b33-f239-4536-b0c0-1e5ec4d55a83","82527":"drn:src:marvel:unison::prod:5a733c56-e28e-4f97-9800-d152ea538fb4","84337":"drn:src:marvel:unison::prod:4e5c55a4-7cc2-44a2-ac0a-0a894829abae","84338":"drn:src:marvel:unison::prod:9dd93684-4948-4354-9eae-1dc26f2a96a4","84339":"drn:src:marvel:unison::prod:03b0dfc6-6450-420f-8fbf-6250650d0d50","84380":"drn:src:marvel:unison::prod:ace83136-6107-4d0b-9ce1-991e50cc66b2","84381":"drn:src:marvel:unison::prod:33d53134-9260-4db1-b3ca-92979cdff81c","84382":"drn:src:marvel:unison::prod:c9c5ac19-564e-491c-8d63-12de8130a45e","84383":"drn:src:marvel:unison::prod:c485f6da-61bc-451a-b546-36abce5c173b","84427":"drn:src:marvel:unison::prod:85507bcf-df95-40a6-ad78-adc80df140ae","84428":"drn:src:marvel:unison::prod:14efe3d8-a7a9-4ae6-9777-fcd511a8c648","84429":"drn:src:marvel:unison::prod:e4462ff2-8b1f-4e2f-945e-39a811e134a5","85662":"drn:src:marvel:unison::prod:3a044d54-51a6-4f63-9b2f-10d35b4f28d2","85938":"drn:src:marvel:unison::prod:2a3f6b4f-6e3b-4e0f-9dbd-20d1782a12e4","85940":"drn:src:marvel:unison::prod:6b5df1e0-b1d2-4898-a59c-36a895b4dfdd","85942":"drn:src:marvel:unison::prod:835707e4-faf6-43c3-b9c0-0ca26532adec","85943":"drn:src:marvel:unison::prod:6a5fc880-0f23-48d4-9adf-aa3883aff7de","85944":"drn:src:marvel:unison::prod:2a9fb767-481d-44ca-89a4-828aac51a01e","85945":"drn:src:marvel:unison::prod:abcd9ad3-cb50-4b27-a18b-e2753aa0e244","88646":"drn:src:marvel:unison::prod:1eabf10d-a4f7-440b-8e65-77e70a040303","88647":"drn:src:marvel:unison::prod:52afd210-8d5e-47da-a5ae-7882975e2471","88648":"drn:src:marvel:unison::prod:ed239cc4-4c72-4eb3-b9e0-babc0fa26725","88649":"drn:src:marvel:unison::prod:7b312cd1-a2a3-4d29-9f14-5a0477ea8772","90080":"drn:src:marvel:unison::prod:0aefcb9a-9c9b-4a66-8ce0-d1d38c117707","90081":"drn:src:marvel:unison::prod:8e3ca126-0bde-4f5a-8c78-65fe43919d0d","90082":"drn:src:marvel:unison::prod:0dfdea56-728c-48a1-a8a0-e5e98515d653","90083":"drn:src:marvel:unison::prod:e4f8cff1-7b5d-4508-a4c4-6ebc844912ab","90131":"drn:src:marvel:unison::prod:d23e215f-0fd4-42ef-af25-e2bceef5e965","90132":"drn:src:marvel:unison::prod:5cc8be83-1576-40a9-8ee1-72cd9551c747","90449":"drn:src:marvel:unison::prod:27793715-ae6c-46e1-852f-77c6ccb75d54"};
+function muLink(src){
+  const p = new URLSearchParams({type:"issue"});
+  if (DRN[src]) p.set("drn", DRN[src]);
+  p.set("sourceId", src);
+  return "https://marvel.smart.link/fiir7ec77?" + p.toString().replace(/%3A/g, ":");
+}
+
+const KEY="dox-read-v1";
+let done = {};
+try { done = JSON.parse(localStorage.getItem(KEY) || "{}") || {}; } catch(e) { done = {}; }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(done)); } catch(e) {} };
+
+const list = document.getElementById("list");
+let n = 0; const rows = [];
+for (const p of PHASES){
+  const sec = document.createElement("section");
+  if (p.cls) sec.className = p.cls;
+  sec.innerHTML = `<div class="phase"><h2>${p.name}</h2><p>${p.blurb}</p></div>`;
+  const ol = document.createElement("ol");
+  for (const it of p.items){
+    n++;
+    const key = it.title;
+    const li = document.createElement("li");
+    if (it.opt) li.classList.add("opt");
+    const id = "i" + n;
+    const src = (it.url.match(/\/comics\/issue\/(\d+)\//) || [])[1];
+    const read = src && DRN[src] ? `<a href="${muLink(src)}" target="_blank" rel="noopener">Read</a>` : "";
+    li.innerHTML = `<span class="n">${n}</span><input type="checkbox" id="${id}" aria-label="Mark ${it.title} read"><label class="t" for="${id}"><b>${it.title}</b><span class="note">${it.copy}${it.note?` · ${it.note}`:""}</span></label><span class="acts">${read}<button type="button" class="cp" aria-label="Copy ${it.copy}">Copy</button></span>`;
+    const cpb = li.querySelector(".cp");
+    cpb.addEventListener("click", () => {
+      const ok = () => { cpb.textContent = "Copied"; setTimeout(()=>cpb.textContent="Copy", 1500); };
+      try { navigator.clipboard.writeText(it.copy).then(ok, () => { cpb.textContent = it.copy; }); } catch(e) { cpb.textContent = it.copy; }
+    });
+    const cb = li.querySelector("input");
+    cb.checked = !!done[key];
+    cb.addEventListener("change", () => { if (cb.checked) done[key]=1; else delete done[key]; save(); update(); });
+    ol.appendChild(li);
+    rows.push({li, cb, key, opt:!!it.opt});
+  }
+  sec.appendChild(ol);
+  list.appendChild(sec);
+}
+
+function update(){
+  const total = rows.length, read = rows.filter(r=>r.cb.checked).length;
+  document.getElementById("count").textContent = `${read} / ${total} read`;
+  document.getElementById("fill").style.width = (100*read/total) + "%";
+  rows.forEach(r => { r.li.classList.toggle("done", r.cb.checked); r.li.classList.remove("next"); });
+  const nx = rows.find(r => !r.cb.checked);
+  if (nx) nx.li.classList.add("next");
+}
+update();
+
+document.getElementById("next").addEventListener("click", () => {
+  const nx = rows.find(r => !r.cb.checked);
+  if (nx) nx.li.scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth", block:"center"});
+});
+const hideBtn = document.getElementById("hide");
+hideBtn.addEventListener("click", () => {
+  const on = document.body.classList.toggle("hide-done");
+  hideBtn.setAttribute("aria-pressed", on); hideBtn.textContent = on ? "Show read" : "Hide read";
+});
+let armed = false;
+const resetBtn = document.getElementById("reset");
+resetBtn.addEventListener("click", () => {
+  if (!armed){ armed = true; resetBtn.textContent = "Tap again to clear all"; setTimeout(()=>{armed=false; resetBtn.textContent="Clear checkmarks";}, 3000); return; }
+  done = {}; save(); rows.forEach(r => r.cb.checked = false); update(); armed = false; resetBtn.textContent = "Clear checkmarks";
+});
+</script>

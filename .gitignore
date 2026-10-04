@@ -1,0 +1,6 @@
+data/raw/*.log
+.DS_Store
+__pycache__/
+# Continuity Guide pages are their content; only the extracted links (data/raw/cg.jsonl) are committed
+data/cg/*.html
+data/cg/links.json

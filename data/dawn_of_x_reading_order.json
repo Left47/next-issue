@@ -1,0 +1,1200 @@
+{
+ "title": "Dawn of X",
+ "source": "The Gotham Archives order via Wikipedia, plus 3 optional side reads",
+ "sections": [
+  {
+   "name": "House of X / Powers of X",
+   "items": [
+    {
+     "title": "House of X #1",
+     "source_id": 72984,
+     "digital_id": null,
+     "drn": null,
+     "optional": false,
+     "note": null,
+     "mu_link": null
+    },
+    {
+     "title": "Powers of X #1",
+     "source_id": 72991,
+     "digital_id": 51997,
+     "drn": "drn:src:marvel:unison::prod:4007758e-719c-4cd2-afe8-102206a95a38",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:4007758e-719c-4cd2-afe8-102206a95a38&sourceId=72991"
+    },
+    {
+     "title": "House of X #2",
+     "source_id": 72985,
+     "digital_id": 52316,
+     "drn": "drn:src:marvel:unison::prod:01097952-6ab2-46cb-9c51-d5105156c064",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:01097952-6ab2-46cb-9c51-d5105156c064&sourceId=72985"
+    },
+    {
+     "title": "Powers of X #2",
+     "source_id": 72992,
+     "digital_id": 52353,
+     "drn": "drn:src:marvel:unison::prod:d906d74f-b485-4965-8105-a27383a60827",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:d906d74f-b485-4965-8105-a27383a60827&sourceId=72992"
+    },
+    {
+     "title": "Powers of X #3",
+     "source_id": 72993,
+     "digital_id": 52382,
+     "drn": "drn:src:marvel:unison::prod:6fa70df0-225b-4e82-ac62-ca3d91b76800",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:6fa70df0-225b-4e82-ac62-ca3d91b76800&sourceId=72993"
+    },
+    {
+     "title": "House of X #3",
+     "source_id": 72986,
+     "digital_id": 52403,
+     "drn": "drn:src:marvel:unison::prod:aa58c741-3658-40ae-b9ef-393b7d1b794d",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:aa58c741-3658-40ae-b9ef-393b7d1b794d&sourceId=72986"
+    },
+    {
+     "title": "House of X #4",
+     "source_id": 72987,
+     "digital_id": 52491,
+     "drn": "drn:src:marvel:unison::prod:6f3ee19a-1e62-4368-aa21-9e672a2bf2fb",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:6f3ee19a-1e62-4368-aa21-9e672a2bf2fb&sourceId=72987"
+    },
+    {
+     "title": "Powers of X #4",
+     "source_id": 72994,
+     "digital_id": 52537,
+     "drn": "drn:src:marvel:unison::prod:a2cffcd1-237a-488a-9bc3-90a926b5bda3",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:a2cffcd1-237a-488a-9bc3-90a926b5bda3&sourceId=72994"
+    },
+    {
+     "title": "House of X #5",
+     "source_id": 72988,
+     "digital_id": 52492,
+     "drn": "drn:src:marvel:unison::prod:7b132dc0-17cd-489f-8417-222a8463548e",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:7b132dc0-17cd-489f-8417-222a8463548e&sourceId=72988"
+    },
+    {
+     "title": "Powers of X #5",
+     "source_id": 72995,
+     "digital_id": 52538,
+     "drn": "drn:src:marvel:unison::prod:11a48834-0cf3-4be6-b189-741c2555835a",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:11a48834-0cf3-4be6-b189-741c2555835a&sourceId=72995"
+    },
+    {
+     "title": "House of X #6",
+     "source_id": 72989,
+     "digital_id": 52801,
+     "drn": "drn:src:marvel:unison::prod:ce22cbe2-cac7-4c10-a11c-12f50d8c8582",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:ce22cbe2-cac7-4c10-a11c-12f50d8c8582&sourceId=72989"
+    },
+    {
+     "title": "Powers of X #6",
+     "source_id": 72996,
+     "digital_id": 52701,
+     "drn": "drn:src:marvel:unison::prod:a1fbd79e-40e7-42dd-b729-c30b32c1e4ff",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:a1fbd79e-40e7-42dd-b729-c30b32c1e4ff&sourceId=72996"
+    }
+   ]
+  },
+  {
+   "name": "Dawn of X",
+   "items": [
+    {
+     "title": "X-Men #1",
+     "source_id": 76803,
+     "digital_id": 52818,
+     "drn": "drn:src:marvel:unison::prod:b08e896a-8a3a-42f6-a805-104520b9a706",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:b08e896a-8a3a-42f6-a805-104520b9a706&sourceId=76803"
+    },
+    {
+     "title": "Marauders #1",
+     "source_id": 76750,
+     "digital_id": 52697,
+     "drn": "drn:src:marvel:unison::prod:9316b1d5-f1ca-4b5d-9429-80d8c1cfa570",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:9316b1d5-f1ca-4b5d-9429-80d8c1cfa570&sourceId=76750"
+    },
+    {
+     "title": "Excalibur #1",
+     "source_id": 76729,
+     "digital_id": 52787,
+     "drn": "drn:src:marvel:unison::prod:d5e73a80-dd3f-4a53-8567-20f803f42e2c",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:d5e73a80-dd3f-4a53-8567-20f803f42e2c&sourceId=76729"
+    },
+    {
+     "title": "New Mutants #1",
+     "source_id": 76757,
+     "digital_id": 53011,
+     "drn": "drn:src:marvel:unison::prod:d78340fc-caea-4bf9-bd48-62106430da0a",
+     "optional": false,
+     "note": "Hickman's space arc",
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:d78340fc-caea-4bf9-bd48-62106430da0a&sourceId=76757"
+    },
+    {
+     "title": "New Mutants #2",
+     "source_id": 76758,
+     "digital_id": 53012,
+     "drn": "drn:src:marvel:unison::prod:389af76a-1174-4220-a755-6007fcd34e75",
+     "optional": false,
+     "note": "Hickman's space arc",
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:389af76a-1174-4220-a755-6007fcd34e75&sourceId=76758"
+    },
+    {
+     "title": "New Mutants #5",
+     "source_id": 76761,
+     "digital_id": 53576,
+     "drn": "drn:src:marvel:unison::prod:67722d05-6233-436c-9ebf-2bbb31081779",
+     "optional": false,
+     "note": "Hickman's space arc",
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:67722d05-6233-436c-9ebf-2bbb31081779&sourceId=76761"
+    },
+    {
+     "title": "New Mutants #7",
+     "source_id": 76763,
+     "digital_id": 53996,
+     "drn": "drn:src:marvel:unison::prod:9beb27a8-4308-4a35-b7c8-18d1b2939ddb",
+     "optional": false,
+     "note": "Hickman's space arc",
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:9beb27a8-4308-4a35-b7c8-18d1b2939ddb&sourceId=76763"
+    },
+    {
+     "title": "New Mutants #3",
+     "source_id": 76759,
+     "digital_id": 53275,
+     "drn": "drn:src:marvel:unison::prod:104b58e2-4f9b-444e-bb21-6f6f4a45da79",
+     "optional": false,
+     "note": "Brisson's Earth arc",
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:104b58e2-4f9b-444e-bb21-6f6f4a45da79&sourceId=76759"
+    },
+    {
+     "title": "New Mutants #4",
+     "source_id": 76760,
+     "digital_id": 53274,
+     "drn": "drn:src:marvel:unison::prod:4789eab1-6773-4e4d-926f-9ad2994bd5dc",
+     "optional": false,
+     "note": "Brisson's Earth arc",
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:4789eab1-6773-4e4d-926f-9ad2994bd5dc&sourceId=76760"
+    },
+    {
+     "title": "New Mutants #6",
+     "source_id": 76762,
+     "digital_id": 53577,
+     "drn": "drn:src:marvel:unison::prod:a23c6c1e-8681-4fe0-ba5e-1ba18189a15c",
+     "optional": false,
+     "note": "Brisson's Earth arc",
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:a23c6c1e-8681-4fe0-ba5e-1ba18189a15c&sourceId=76762"
+    },
+    {
+     "title": "X-Force #1",
+     "source_id": 76789,
+     "digital_id": 53038,
+     "drn": "drn:src:marvel:unison::prod:79978cd0-5d01-4ca2-bdac-ca74a2e790f8",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:79978cd0-5d01-4ca2-bdac-ca74a2e790f8&sourceId=76789"
+    },
+    {
+     "title": "Fallen Angels #1",
+     "source_id": 76742,
+     "digital_id": 52984,
+     "drn": "drn:src:marvel:unison::prod:62952170-24dc-4686-b1a8-6b6d23ec785a",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:62952170-24dc-4686-b1a8-6b6d23ec785a&sourceId=76742"
+    },
+    {
+     "title": "Fallen Angels #2",
+     "source_id": 76743,
+     "digital_id": 52985,
+     "drn": "drn:src:marvel:unison::prod:15c999db-32ef-4689-a867-8b508d3db62d",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:15c999db-32ef-4689-a867-8b508d3db62d&sourceId=76743"
+    },
+    {
+     "title": "Fallen Angels #3",
+     "source_id": 76744,
+     "digital_id": 53241,
+     "drn": "drn:src:marvel:unison::prod:82e8b823-3ba0-43d3-ac0c-b719c1c51d17",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:82e8b823-3ba0-43d3-ac0c-b719c1c51d17&sourceId=76744"
+    },
+    {
+     "title": "Fallen Angels #4",
+     "source_id": 76745,
+     "digital_id": 53245,
+     "drn": "drn:src:marvel:unison::prod:aeb021ef-4ac4-4899-8408-37d3da777a62",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:aeb021ef-4ac4-4899-8408-37d3da777a62&sourceId=76745"
+    },
+    {
+     "title": "Fallen Angels #5",
+     "source_id": 76746,
+     "digital_id": 53550,
+     "drn": "drn:src:marvel:unison::prod:45d4eda2-c3ff-4800-a2c6-5a00a6c7cd6c",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:45d4eda2-c3ff-4800-a2c6-5a00a6c7cd6c&sourceId=76746"
+    },
+    {
+     "title": "Fallen Angels #6",
+     "source_id": 76747,
+     "digital_id": 53551,
+     "drn": "drn:src:marvel:unison::prod:c66bf8f0-eb93-405e-8d3f-d29c4d4661f0",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:c66bf8f0-eb93-405e-8d3f-d29c4d4661f0&sourceId=76747"
+    },
+    {
+     "title": "X-Men #2",
+     "source_id": 76804,
+     "digital_id": 53040,
+     "drn": "drn:src:marvel:unison::prod:b70f7589-f7b5-4460-8530-e9e4f5bdcc79",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:b70f7589-f7b5-4460-8530-e9e4f5bdcc79&sourceId=76804"
+    },
+    {
+     "title": "X-Men #3",
+     "source_id": 76805,
+     "digital_id": 53309,
+     "drn": "drn:src:marvel:unison::prod:4f6d6998-9e47-4686-ad76-f5681aec3689",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:4f6d6998-9e47-4686-ad76-f5681aec3689&sourceId=76805"
+    },
+    {
+     "title": "Incoming! #1",
+     "source_id": null,
+     "digital_id": null,
+     "drn": null,
+     "optional": true,
+     "note": "Hickman Mr. Sinister short",
+     "mu_link": null
+    },
+    {
+     "title": "Wolverine #1",
+     "source_id": 78724,
+     "digital_id": 54079,
+     "drn": "drn:src:marvel:unison::prod:b4512d00-5471-481c-addb-4e5673be7dff",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:b4512d00-5471-481c-addb-4e5673be7dff&sourceId=78724"
+    },
+    {
+     "title": "Wolverine #2",
+     "source_id": 78725,
+     "digital_id": 54355,
+     "drn": "drn:src:marvel:unison::prod:1de9c550-8d5a-4158-ba45-663b5e4ada96",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:1de9c550-8d5a-4158-ba45-663b5e4ada96&sourceId=78725"
+    },
+    {
+     "title": "Wolverine #3",
+     "source_id": 78726,
+     "digital_id": 54667,
+     "drn": "drn:src:marvel:unison::prod:7811443b-aca1-4465-945a-78779a3987ef",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:7811443b-aca1-4465-945a-78779a3987ef&sourceId=78726"
+    },
+    {
+     "title": "Marauders #2",
+     "source_id": 76751,
+     "digital_id": 53006,
+     "drn": "drn:src:marvel:unison::prod:57f6f587-f69b-4a93-9320-9b0c3a4e2cc4",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:57f6f587-f69b-4a93-9320-9b0c3a4e2cc4&sourceId=76751"
+    },
+    {
+     "title": "Marauders #3",
+     "source_id": 76752,
+     "digital_id": 53267,
+     "drn": "drn:src:marvel:unison::prod:4d8f07ea-c0a4-4273-a1c5-f747c51e4dd8",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:4d8f07ea-c0a4-4273-a1c5-f747c51e4dd8&sourceId=76752"
+    },
+    {
+     "title": "Marauders #4",
+     "source_id": 76753,
+     "digital_id": 53268,
+     "drn": "drn:src:marvel:unison::prod:00b90e86-047f-4688-a063-6ab096ddc528",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:00b90e86-047f-4688-a063-6ab096ddc528&sourceId=76753"
+    },
+    {
+     "title": "Marauders #5",
+     "source_id": 76754,
+     "digital_id": 53566,
+     "drn": "drn:src:marvel:unison::prod:05e5ae32-3f41-48c5-b165-bc953b139452",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:05e5ae32-3f41-48c5-b165-bc953b139452&sourceId=76754"
+    },
+    {
+     "title": "Marauders #6",
+     "source_id": 76755,
+     "digital_id": 53567,
+     "drn": "drn:src:marvel:unison::prod:4930ed0c-86b8-4304-947a-2808d8654f29",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:4930ed0c-86b8-4304-947a-2808d8654f29&sourceId=76755"
+    },
+    {
+     "title": "X-Force #2",
+     "source_id": 76790,
+     "digital_id": 53039,
+     "drn": "drn:src:marvel:unison::prod:d10088cd-379f-43fa-906f-3cff7aa25247",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:d10088cd-379f-43fa-906f-3cff7aa25247&sourceId=76790"
+    },
+    {
+     "title": "X-Force #3",
+     "source_id": 76791,
+     "digital_id": 53307,
+     "drn": "drn:src:marvel:unison::prod:815e606c-0f9a-4322-8f29-8152031e7eeb",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:815e606c-0f9a-4322-8f29-8152031e7eeb&sourceId=76791"
+    },
+    {
+     "title": "Excalibur #2",
+     "source_id": 76730,
+     "digital_id": 52983,
+     "drn": "drn:src:marvel:unison::prod:55ab0bef-f125-4c97-8908-552afc404dca",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:55ab0bef-f125-4c97-8908-552afc404dca&sourceId=76730"
+    },
+    {
+     "title": "Excalibur #3",
+     "source_id": 76731,
+     "digital_id": 53233,
+     "drn": "drn:src:marvel:unison::prod:16d6fa0c-2cdd-470d-8464-20a4fd231220",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:16d6fa0c-2cdd-470d-8464-20a4fd231220&sourceId=76731"
+    },
+    {
+     "title": "Excalibur #4",
+     "source_id": 76732,
+     "digital_id": 53239,
+     "drn": "drn:src:marvel:unison::prod:c7f65de3-6260-4e1f-8bd6-3a8a42c7883c",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:c7f65de3-6260-4e1f-8bd6-3a8a42c7883c&sourceId=76732"
+    },
+    {
+     "title": "Excalibur #5",
+     "source_id": 76733,
+     "digital_id": 53548,
+     "drn": "drn:src:marvel:unison::prod:82b2aeb8-f002-4629-87cf-686891d6e722",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:82b2aeb8-f002-4629-87cf-686891d6e722&sourceId=76733"
+    },
+    {
+     "title": "Excalibur #6",
+     "source_id": 76734,
+     "digital_id": 53549,
+     "drn": "drn:src:marvel:unison::prod:9044ffd7-f817-4c08-bb63-5fad7a93aff5",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:9044ffd7-f817-4c08-bb63-5fad7a93aff5&sourceId=76734"
+    },
+    {
+     "title": "X-Force #4",
+     "source_id": 76792,
+     "digital_id": 53308,
+     "drn": "drn:src:marvel:unison::prod:24643c2c-0f54-4c03-80ac-a8030ea456d5",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:24643c2c-0f54-4c03-80ac-a8030ea456d5&sourceId=76792"
+    },
+    {
+     "title": "X-Force #5",
+     "source_id": 76793,
+     "digital_id": 52710,
+     "drn": "drn:src:marvel:unison::prod:4f45d1db-80e1-494e-8860-c8aa84203b48",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:4f45d1db-80e1-494e-8860-c8aa84203b48&sourceId=76793"
+    },
+    {
+     "title": "X-Men #4",
+     "source_id": 76806,
+     "digital_id": 53310,
+     "drn": "drn:src:marvel:unison::prod:74ef2633-f788-4cf7-ad47-d22331a3a774",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:74ef2633-f788-4cf7-ad47-d22331a3a774&sourceId=76806"
+    },
+    {
+     "title": "X-Men #5",
+     "source_id": 76807,
+     "digital_id": 53609,
+     "drn": "drn:src:marvel:unison::prod:78d1d89d-2897-4959-8ccf-1b28230c3412",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:78d1d89d-2897-4959-8ccf-1b28230c3412&sourceId=76807"
+    },
+    {
+     "title": "X-Men #6",
+     "source_id": 79944,
+     "digital_id": 53610,
+     "drn": "drn:src:marvel:unison::prod:49e86984-6186-4f6b-b17d-e66de7756a84",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:49e86984-6186-4f6b-b17d-e66de7756a84&sourceId=79944"
+    },
+    {
+     "title": "X-Men/Fantastic Four #1",
+     "source_id": 77993,
+     "digital_id": 54085,
+     "drn": "drn:src:marvel:unison::prod:7a019c6c-73e0-457d-8a6e-13657325ec00",
+     "optional": true,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:7a019c6c-73e0-457d-8a6e-13657325ec00&sourceId=77993"
+    },
+    {
+     "title": "X-Men/Fantastic Four #2",
+     "source_id": 77995,
+     "digital_id": 54086,
+     "drn": "drn:src:marvel:unison::prod:f041fce4-280b-49b2-aa16-a42a1d40282b",
+     "optional": true,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:f041fce4-280b-49b2-aa16-a42a1d40282b&sourceId=77995"
+    },
+    {
+     "title": "X-Men/Fantastic Four #3",
+     "source_id": 77996,
+     "digital_id": 54359,
+     "drn": "drn:src:marvel:unison::prod:a7af8808-7255-40f8-8902-dcb18b15a9f7",
+     "optional": true,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:a7af8808-7255-40f8-8902-dcb18b15a9f7&sourceId=77996"
+    },
+    {
+     "title": "X-Men/Fantastic Four #4",
+     "source_id": 77997,
+     "digital_id": 54671,
+     "drn": "drn:src:marvel:unison::prod:8e91e7f7-8d46-4ff7-9358-6c5eae5817fd",
+     "optional": true,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:8e91e7f7-8d46-4ff7-9358-6c5eae5817fd&sourceId=77997"
+    },
+    {
+     "title": "X-Force #6",
+     "source_id": 76794,
+     "digital_id": 53608,
+     "drn": "drn:src:marvel:unison::prod:fe4513c0-1796-4cbe-874d-bd0828ce2a57",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:fe4513c0-1796-4cbe-874d-bd0828ce2a57&sourceId=76794"
+    },
+    {
+     "title": "Marauders #7",
+     "source_id": 78401,
+     "digital_id": 53985,
+     "drn": "drn:src:marvel:unison::prod:46a6a858-772b-4468-92b5-55a74d61ec68",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:46a6a858-772b-4468-92b5-55a74d61ec68&sourceId=78401"
+    },
+    {
+     "title": "Marauders #8",
+     "source_id": 78402,
+     "digital_id": 53986,
+     "drn": "drn:src:marvel:unison::prod:54f1ac4b-a281-4867-bc62-918d08f19476",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:54f1ac4b-a281-4867-bc62-918d08f19476&sourceId=78402"
+    },
+    {
+     "title": "Marauders #9",
+     "source_id": 78403,
+     "digital_id": 54279,
+     "drn": "drn:src:marvel:unison::prod:4f57733c-83c1-45b3-9ca8-7bd39f999ef5",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:4f57733c-83c1-45b3-9ca8-7bd39f999ef5&sourceId=78403"
+    },
+    {
+     "title": "Marauders #10",
+     "source_id": 78404,
+     "digital_id": 54627,
+     "drn": "drn:src:marvel:unison::prod:5c8582c6-9244-4284-bf4e-0797b0a8f2d6",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:5c8582c6-9244-4284-bf4e-0797b0a8f2d6&sourceId=78404"
+    },
+    {
+     "title": "X-Force #7",
+     "source_id": 76795,
+     "digital_id": 54082,
+     "drn": "drn:src:marvel:unison::prod:403371bc-52f6-4d1f-b9d2-25d49c56dcfd",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:403371bc-52f6-4d1f-b9d2-25d49c56dcfd&sourceId=76795"
+    },
+    {
+     "title": "X-Force #8",
+     "source_id": 76796,
+     "digital_id": 54083,
+     "drn": "drn:src:marvel:unison::prod:1f226aa1-6d1b-44ef-b521-ef90d5736a10",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:1f226aa1-6d1b-44ef-b521-ef90d5736a10&sourceId=76796"
+    },
+    {
+     "title": "Giant-Size X-Men: Jean Grey & Emma Frost #1",
+     "source_id": 82527,
+     "digital_id": 53964,
+     "drn": "drn:src:marvel:unison::prod:5a733c56-e28e-4f97-9800-d152ea538fb4",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:5a733c56-e28e-4f97-9800-d152ea538fb4&sourceId=82527"
+    },
+    {
+     "title": "Excalibur #7",
+     "source_id": 78388,
+     "digital_id": 53954,
+     "drn": "drn:src:marvel:unison::prod:9820d112-31bf-4235-b991-c63d57bdc6e7",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:9820d112-31bf-4235-b991-c63d57bdc6e7&sourceId=78388"
+    },
+    {
+     "title": "Excalibur #8",
+     "source_id": 78389,
+     "digital_id": 54255,
+     "drn": "drn:src:marvel:unison::prod:113889de-ffe2-4771-b2bf-58dbc9a4e7f2",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:113889de-ffe2-4771-b2bf-58dbc9a4e7f2&sourceId=78389"
+    },
+    {
+     "title": "New Mutants #8",
+     "source_id": 76764,
+     "digital_id": 53997,
+     "drn": "drn:src:marvel:unison::prod:39a37838-7ad0-41cd-97c4-b661f003aae6",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:39a37838-7ad0-41cd-97c4-b661f003aae6&sourceId=76764"
+    },
+    {
+     "title": "Cable #1",
+     "source_id": 78653,
+     "digital_id": 54246,
+     "drn": "drn:src:marvel:unison::prod:ea64f378-4872-4665-9dd4-0712d52450d7",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:ea64f378-4872-4665-9dd4-0712d52450d7&sourceId=78653"
+    },
+    {
+     "title": "Cable #2",
+     "source_id": 78654,
+     "digital_id": 54588,
+     "drn": "drn:src:marvel:unison::prod:f82d2232-4e1c-4baa-90dd-b0a1fcbe03df",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:f82d2232-4e1c-4baa-90dd-b0a1fcbe03df&sourceId=78654"
+    },
+    {
+     "title": "Cable #3",
+     "source_id": 78655,
+     "digital_id": 54860,
+     "drn": "drn:src:marvel:unison::prod:d9009db8-9b82-46f7-95ef-c88d50076b74",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:d9009db8-9b82-46f7-95ef-c88d50076b74&sourceId=78655"
+    },
+    {
+     "title": "Cable #4",
+     "source_id": 78656,
+     "digital_id": 55060,
+     "drn": "drn:src:marvel:unison::prod:5f2a99ad-b695-4bcf-9d7c-2aa20952f711",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:5f2a99ad-b695-4bcf-9d7c-2aa20952f711&sourceId=78656"
+    },
+    {
+     "title": "Wolverine #4",
+     "source_id": 78727,
+     "digital_id": 54943,
+     "drn": "drn:src:marvel:unison::prod:fb876173-6476-4ce8-81ba-263de00b7ca2",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:fb876173-6476-4ce8-81ba-263de00b7ca2&sourceId=78727"
+    },
+    {
+     "title": "Wolverine #5",
+     "source_id": 78728,
+     "digital_id": 55139,
+     "drn": "drn:src:marvel:unison::prod:8ab1cba4-7f11-4406-9210-8f068d887cba",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:8ab1cba4-7f11-4406-9210-8f068d887cba&sourceId=78728"
+    },
+    {
+     "title": "New Mutants #9",
+     "source_id": 76765,
+     "digital_id": 54306,
+     "drn": "drn:src:marvel:unison::prod:8d3e5786-69e8-4e52-b2c4-03cba9275ef2",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:8d3e5786-69e8-4e52-b2c4-03cba9275ef2&sourceId=76765"
+    },
+    {
+     "title": "New Mutants #10",
+     "source_id": 76766,
+     "digital_id": 54637,
+     "drn": "drn:src:marvel:unison::prod:1c175f7a-b4c0-48d9-836c-3c6ebfcaffb4",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:1c175f7a-b4c0-48d9-836c-3c6ebfcaffb4&sourceId=76766"
+    },
+    {
+     "title": "New Mutants #11",
+     "source_id": 76767,
+     "digital_id": 54916,
+     "drn": "drn:src:marvel:unison::prod:c5dd503e-6341-4074-8445-cfbc2037621c",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:c5dd503e-6341-4074-8445-cfbc2037621c&sourceId=76767"
+    },
+    {
+     "title": "New Mutants #12",
+     "source_id": 76768,
+     "digital_id": 55107,
+     "drn": "drn:src:marvel:unison::prod:2fa0f0ba-8bdd-4c52-bbe0-463286cda151",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:2fa0f0ba-8bdd-4c52-bbe0-463286cda151&sourceId=76768"
+    },
+    {
+     "title": "X-Men #7",
+     "source_id": 79945,
+     "digital_id": 54084,
+     "drn": "drn:src:marvel:unison::prod:675bcdb8-6a23-4a1f-b375-a700600ba889",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:675bcdb8-6a23-4a1f-b375-a700600ba889&sourceId=79945"
+    },
+    {
+     "title": "X-Men #8",
+     "source_id": 79946,
+     "digital_id": 54357,
+     "drn": "drn:src:marvel:unison::prod:b9cdfb94-407a-475d-910a-776d6404ee4a",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:b9cdfb94-407a-475d-910a-776d6404ee4a&sourceId=79946"
+    },
+    {
+     "title": "X-Men #9",
+     "source_id": 79947,
+     "digital_id": 54358,
+     "drn": "drn:src:marvel:unison::prod:dc2e9f2e-f683-49ad-9d53-91c624db3a05",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:dc2e9f2e-f683-49ad-9d53-91c624db3a05&sourceId=79947"
+    },
+    {
+     "title": "X-Force #9",
+     "source_id": 76797,
+     "digital_id": 54356,
+     "drn": "drn:src:marvel:unison::prod:5ffad203-3dfb-45a0-be09-11975d967eb3",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:5ffad203-3dfb-45a0-be09-11975d967eb3&sourceId=76797"
+    },
+    {
+     "title": "X-Force #10",
+     "source_id": 76798,
+     "digital_id": 54669,
+     "drn": "drn:src:marvel:unison::prod:f181d425-aee8-4d5f-a86e-039a11b05aea",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:f181d425-aee8-4d5f-a86e-039a11b05aea&sourceId=76798"
+    },
+    {
+     "title": "Giant-Size X-Men: Nightcrawler #1",
+     "source_id": 82506,
+     "digital_id": 54264,
+     "drn": "drn:src:marvel:unison::prod:823ca87c-4aec-4ea5-924f-73adce7fa5d9",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:823ca87c-4aec-4ea5-924f-73adce7fa5d9&sourceId=82506"
+    },
+    {
+     "title": "Hellions #1",
+     "source_id": 85938,
+     "digital_id": 54268,
+     "drn": "drn:src:marvel:unison::prod:2a3f6b4f-6e3b-4e0f-9dbd-20d1782a12e4",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:2a3f6b4f-6e3b-4e0f-9dbd-20d1782a12e4&sourceId=85938"
+    },
+    {
+     "title": "Hellions #2",
+     "source_id": 85940,
+     "digital_id": 54621,
+     "drn": "drn:src:marvel:unison::prod:6b5df1e0-b1d2-4898-a59c-36a895b4dfdd",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:6b5df1e0-b1d2-4898-a59c-36a895b4dfdd&sourceId=85940"
+    },
+    {
+     "title": "Hellions #3",
+     "source_id": 85942,
+     "digital_id": 54896,
+     "drn": "drn:src:marvel:unison::prod:835707e4-faf6-43c3-b9c0-0ca26532adec",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:835707e4-faf6-43c3-b9c0-0ca26532adec&sourceId=85942"
+    },
+    {
+     "title": "Hellions #4",
+     "source_id": 85943,
+     "digital_id": 55092,
+     "drn": "drn:src:marvel:unison::prod:6a5fc880-0f23-48d4-9adf-aa3883aff7de",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:6a5fc880-0f23-48d4-9adf-aa3883aff7de&sourceId=85943"
+    },
+    {
+     "title": "Giant-Size X-Men: Magneto #1",
+     "source_id": 82502,
+     "digital_id": 54617,
+     "drn": "drn:src:marvel:unison::prod:600d75a4-ec46-464a-bf64-d203a500764c",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:600d75a4-ec46-464a-bf64-d203a500764c&sourceId=82502"
+    },
+    {
+     "title": "Empyre: X-Men #1",
+     "source_id": 88646,
+     "digital_id": 54883,
+     "drn": "drn:src:marvel:unison::prod:1eabf10d-a4f7-440b-8e65-77e70a040303",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:1eabf10d-a4f7-440b-8e65-77e70a040303&sourceId=88646"
+    },
+    {
+     "title": "Empyre: X-Men #2",
+     "source_id": 88647,
+     "digital_id": 54884,
+     "drn": "drn:src:marvel:unison::prod:52afd210-8d5e-47da-a5ae-7882975e2471",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:52afd210-8d5e-47da-a5ae-7882975e2471&sourceId=88647"
+    },
+    {
+     "title": "Empyre: X-Men #3",
+     "source_id": 88648,
+     "digital_id": 55082,
+     "drn": "drn:src:marvel:unison::prod:ed239cc4-4c72-4eb3-b9e0-babc0fa26725",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:ed239cc4-4c72-4eb3-b9e0-babc0fa26725&sourceId=88648"
+    },
+    {
+     "title": "Empyre: X-Men #4",
+     "source_id": 88649,
+     "digital_id": 55083,
+     "drn": "drn:src:marvel:unison::prod:7b312cd1-a2a3-4d29-9f14-5a0477ea8772",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:7b312cd1-a2a3-4d29-9f14-5a0477ea8772&sourceId=88649"
+    },
+    {
+     "title": "X-Men #10",
+     "source_id": 79948,
+     "digital_id": 54670,
+     "drn": "drn:src:marvel:unison::prod:22f37fce-876c-492d-a414-9bbebdf1ebc1",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:22f37fce-876c-492d-a414-9bbebdf1ebc1&sourceId=79948"
+    },
+    {
+     "title": "X-Men #11",
+     "source_id": 79949,
+     "digital_id": 54946,
+     "drn": "drn:src:marvel:unison::prod:5ef82b52-0fa9-494e-9653-b7e7fffa7c10",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:5ef82b52-0fa9-494e-9653-b7e7fffa7c10&sourceId=79949"
+    },
+    {
+     "title": "X-Factor #1",
+     "source_id": 78746,
+     "digital_id": 54668,
+     "drn": "drn:src:marvel:unison::prod:c0008eba-ca8f-4057-a6b1-4db2a5528247",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:c0008eba-ca8f-4057-a6b1-4db2a5528247&sourceId=78746"
+    },
+    {
+     "title": "X-Factor #2",
+     "source_id": 78747,
+     "digital_id": 54944,
+     "drn": "drn:src:marvel:unison::prod:53536695-99b0-4641-b598-2b6e9875cb84",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:53536695-99b0-4641-b598-2b6e9875cb84&sourceId=78747"
+    },
+    {
+     "title": "X-Factor #3",
+     "source_id": 78748,
+     "digital_id": 55140,
+     "drn": "drn:src:marvel:unison::prod:fc212139-06c2-4d02-a868-8045bc9544ef",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:fc212139-06c2-4d02-a868-8045bc9544ef&sourceId=78748"
+    },
+    {
+     "title": "Giant-Size X-Men: Fantomex #1",
+     "source_id": 82526,
+     "digital_id": 54892,
+     "drn": "drn:src:marvel:unison::prod:f50c3b33-f239-4536-b0c0-1e5ec4d55a83",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:f50c3b33-f239-4536-b0c0-1e5ec4d55a83&sourceId=82526"
+    },
+    {
+     "title": "Marauders #11",
+     "source_id": 78405,
+     "digital_id": 54904,
+     "drn": "drn:src:marvel:unison::prod:562a9341-3bfa-409c-8f9f-637b17ffeaa7",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:562a9341-3bfa-409c-8f9f-637b17ffeaa7&sourceId=78405"
+    },
+    {
+     "title": "Marauders #12",
+     "source_id": 90080,
+     "digital_id": 55100,
+     "drn": "drn:src:marvel:unison::prod:0aefcb9a-9c9b-4a66-8ce0-d1d38c117707",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:0aefcb9a-9c9b-4a66-8ce0-d1d38c117707&sourceId=90080"
+    },
+    {
+     "title": "X-Force #11",
+     "source_id": 76799,
+     "digital_id": 54945,
+     "drn": "drn:src:marvel:unison::prod:d8d7c719-0517-4101-8599-ce848838dd63",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:d8d7c719-0517-4101-8599-ce848838dd63&sourceId=76799"
+    },
+    {
+     "title": "X-Force #12",
+     "source_id": 76800,
+     "digital_id": 55141,
+     "drn": "drn:src:marvel:unison::prod:619b1910-99d9-43a2-9eb5-ea8b03b947c7",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:619b1910-99d9-43a2-9eb5-ea8b03b947c7&sourceId=76800"
+    },
+    {
+     "title": "Giant-Size X-Men: Storm #1",
+     "source_id": 82514,
+     "digital_id": 55089,
+     "drn": "drn:src:marvel:unison::prod:25c027bb-ac9e-4ed3-bcb6-85314f0f600c",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:25c027bb-ac9e-4ed3-bcb6-85314f0f600c&sourceId=82514"
+    },
+    {
+     "title": "Excalibur #9",
+     "source_id": 78390,
+     "digital_id": 54256,
+     "drn": "drn:src:marvel:unison::prod:580c6087-fb25-4906-b8e0-540288881cf3",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:580c6087-fb25-4906-b8e0-540288881cf3&sourceId=78390"
+    },
+    {
+     "title": "Excalibur #10",
+     "source_id": 78391,
+     "digital_id": 54612,
+     "drn": "drn:src:marvel:unison::prod:be426fea-2d15-43e0-9e09-2c4148466adf",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:be426fea-2d15-43e0-9e09-2c4148466adf&sourceId=78391"
+    },
+    {
+     "title": "Excalibur #11",
+     "source_id": 78392,
+     "digital_id": 54885,
+     "drn": "drn:src:marvel:unison::prod:aabf2cc3-412f-466c-ae96-5ca5e571e540",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:aabf2cc3-412f-466c-ae96-5ca5e571e540&sourceId=78392"
+    },
+    {
+     "title": "Excalibur #12",
+     "source_id": 84380,
+     "digital_id": 55084,
+     "drn": "drn:src:marvel:unison::prod:ace83136-6107-4d0b-9ce1-991e50cc66b2",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:ace83136-6107-4d0b-9ce1-991e50cc66b2&sourceId=84380"
+    },
+    {
+     "title": "X-Men #12",
+     "source_id": 79950,
+     "digital_id": 55142,
+     "drn": "drn:src:marvel:unison::prod:de9331b3-5551-405a-8a54-c58e0ace1a55",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:de9331b3-5551-405a-8a54-c58e0ace1a55&sourceId=79950"
+    },
+    {
+     "title": "Free Comic Book Day: X-Men (2020) #1",
+     "source_id": 85662,
+     "digital_id": 54261,
+     "drn": "drn:src:marvel:unison::prod:3a044d54-51a6-4f63-9b2f-10d35b4f28d2",
+     "optional": true,
+     "note": "Short X of Swords prelude",
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:3a044d54-51a6-4f63-9b2f-10d35b4f28d2&sourceId=85662"
+    }
+   ]
+  },
+  {
+   "name": "X of Swords",
+   "items": [
+    {
+     "title": "X of Swords: Creation #1",
+     "source_id": 84337,
+     "digital_id": 55417,
+     "drn": "drn:src:marvel:unison::prod:4e5c55a4-7cc2-44a2-ac0a-0a894829abae",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:4e5c55a4-7cc2-44a2-ac0a-0a894829abae&sourceId=84337"
+    },
+    {
+     "title": "X-Factor #4",
+     "source_id": 78749,
+     "digital_id": 55438,
+     "drn": "drn:src:marvel:unison::prod:2126b64f-18de-4950-8510-aef6a54414ab",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:2126b64f-18de-4950-8510-aef6a54414ab&sourceId=78749"
+    },
+    {
+     "title": "Wolverine #6",
+     "source_id": 78729,
+     "digital_id": 55573,
+     "drn": "drn:src:marvel:unison::prod:4794fa10-293a-4078-97c0-fd50efb9403d",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:4794fa10-293a-4078-97c0-fd50efb9403d&sourceId=78729"
+    },
+    {
+     "title": "X-Force #13",
+     "source_id": 90131,
+     "digital_id": 55575,
+     "drn": "drn:src:marvel:unison::prod:d23e215f-0fd4-42ef-af25-e2bceef5e965",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:d23e215f-0fd4-42ef-af25-e2bceef5e965&sourceId=90131"
+    },
+    {
+     "title": "Marauders #13",
+     "source_id": 90081,
+     "digital_id": 55559,
+     "drn": "drn:src:marvel:unison::prod:8e3ca126-0bde-4f5a-8c78-65fe43919d0d",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:8e3ca126-0bde-4f5a-8c78-65fe43919d0d&sourceId=90081"
+    },
+    {
+     "title": "Hellions #5",
+     "source_id": 85944,
+     "digital_id": 55554,
+     "drn": "drn:src:marvel:unison::prod:2a9fb767-481d-44ca-89a4-828aac51a01e",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:2a9fb767-481d-44ca-89a4-828aac51a01e&sourceId=85944"
+    },
+    {
+     "title": "New Mutants #13",
+     "source_id": 90449,
+     "digital_id": 55560,
+     "drn": "drn:src:marvel:unison::prod:27793715-ae6c-46e1-852f-77c6ccb75d54",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:27793715-ae6c-46e1-852f-77c6ccb75d54&sourceId=90449"
+    },
+    {
+     "title": "Cable #5",
+     "source_id": 78657,
+     "digital_id": 55546,
+     "drn": "drn:src:marvel:unison::prod:42e3a9a8-9836-4b66-bab6-caacb195c749",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:42e3a9a8-9836-4b66-bab6-caacb195c749&sourceId=78657"
+    },
+    {
+     "title": "Excalibur #13",
+     "source_id": 84381,
+     "digital_id": 55550,
+     "drn": "drn:src:marvel:unison::prod:33d53134-9260-4db1-b3ca-92979cdff81c",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:33d53134-9260-4db1-b3ca-92979cdff81c&sourceId=84381"
+    },
+    {
+     "title": "X-Men #13",
+     "source_id": 84427,
+     "digital_id": 55576,
+     "drn": "drn:src:marvel:unison::prod:85507bcf-df95-40a6-ad78-adc80df140ae",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:85507bcf-df95-40a6-ad78-adc80df140ae&sourceId=84427"
+    },
+    {
+     "title": "X of Swords: Stasis #1",
+     "source_id": 84338,
+     "digital_id": 55574,
+     "drn": "drn:src:marvel:unison::prod:9dd93684-4948-4354-9eae-1dc26f2a96a4",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:9dd93684-4948-4354-9eae-1dc26f2a96a4&sourceId=84338"
+    },
+    {
+     "title": "X-Men #14",
+     "source_id": 84428,
+     "digital_id": 55717,
+     "drn": "drn:src:marvel:unison::prod:14efe3d8-a7a9-4ae6-9777-fcd511a8c648",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:14efe3d8-a7a9-4ae6-9777-fcd511a8c648&sourceId=84428"
+    },
+    {
+     "title": "Marauders #14",
+     "source_id": 90082,
+     "digital_id": 55695,
+     "drn": "drn:src:marvel:unison::prod:0dfdea56-728c-48a1-a8a0-e5e98515d653",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:0dfdea56-728c-48a1-a8a0-e5e98515d653&sourceId=90082"
+    },
+    {
+     "title": "Marauders #15",
+     "source_id": 90083,
+     "digital_id": 55696,
+     "drn": "drn:src:marvel:unison::prod:e4f8cff1-7b5d-4508-a4c4-6ebc844912ab",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:e4f8cff1-7b5d-4508-a4c4-6ebc844912ab&sourceId=90083"
+    },
+    {
+     "title": "Excalibur #14",
+     "source_id": 84382,
+     "digital_id": 55685,
+     "drn": "drn:src:marvel:unison::prod:c9c5ac19-564e-491c-8d63-12de8130a45e",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:c9c5ac19-564e-491c-8d63-12de8130a45e&sourceId=84382"
+    },
+    {
+     "title": "Wolverine #7",
+     "source_id": 78730,
+     "digital_id": 55713,
+     "drn": "drn:src:marvel:unison::prod:05e73c3e-404f-4b50-8bfb-d1a6dfaaf3ef",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:05e73c3e-404f-4b50-8bfb-d1a6dfaaf3ef&sourceId=78730"
+    },
+    {
+     "title": "X-Force #14",
+     "source_id": 90132,
+     "digital_id": 55716,
+     "drn": "drn:src:marvel:unison::prod:5cc8be83-1576-40a9-8ee1-72cd9551c747",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:5cc8be83-1576-40a9-8ee1-72cd9551c747&sourceId=90132"
+    },
+    {
+     "title": "Hellions #6",
+     "source_id": 85945,
+     "digital_id": 55690,
+     "drn": "drn:src:marvel:unison::prod:abcd9ad3-cb50-4b27-a18b-e2753aa0e244",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:abcd9ad3-cb50-4b27-a18b-e2753aa0e244&sourceId=85945"
+    },
+    {
+     "title": "Cable #6",
+     "source_id": 78658,
+     "digital_id": 55680,
+     "drn": "drn:src:marvel:unison::prod:2e385c87-0e4e-4f76-8715-444da49b6d6f",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:2e385c87-0e4e-4f76-8715-444da49b6d6f&sourceId=78658"
+    },
+    {
+     "title": "X-Men #15",
+     "source_id": 84429,
+     "digital_id": 55718,
+     "drn": "drn:src:marvel:unison::prod:e4462ff2-8b1f-4e2f-945e-39a811e134a5",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:e4462ff2-8b1f-4e2f-945e-39a811e134a5&sourceId=84429"
+    },
+    {
+     "title": "Excalibur #15",
+     "source_id": 84383,
+     "digital_id": 55686,
+     "drn": "drn:src:marvel:unison::prod:c485f6da-61bc-451a-b546-36abce5c173b",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:c485f6da-61bc-451a-b546-36abce5c173b&sourceId=84383"
+    },
+    {
+     "title": "X of Swords: Destruction #1",
+     "source_id": 84339,
+     "digital_id": 55715,
+     "drn": "drn:src:marvel:unison::prod:03b0dfc6-6450-420f-8fbf-6250650d0d50",
+     "optional": false,
+     "note": null,
+     "mu_link": "https://marvel.smart.link/fiir7ec77?type=issue&drn=drn:src:marvel:unison::prod:03b0dfc6-6450-420f-8fbf-6250650d0d50&sourceId=84339"
+    }
+   ]
+  }
+ ]
+}
