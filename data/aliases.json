@@ -1,0 +1,6 @@
+{
+  "_doc": "Series name fixes applied at build time: [title, year] -> [title, year]. For runs that sources label inconsistently.",
+  "aliases": [
+    [["Uncanny X-Men", 1981], ["Uncanny X-Men", 1963]]
+  ]
+}

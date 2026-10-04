@@ -284,12 +284,28 @@ def names():
     for _ in range(3):
         nm = marvel_names()
         series = assemble(recs, nm, cgn)
-        todo = sorted((duplicate_suspects(series, cgn, nm) | early_suspects(series, cgn, nm)) - have)
+        todo = sorted((duplicate_suspects(series, cgn, nm) | early_suspects(series, cgn, nm) | small_suspects(series, nm)) - have)
         print(f"names: {len(todo)} misplaced-looking issues to look up", file=sys.stderr)
         if not todo:
             break
         run_pool(marvel_name, todo, "names.jsonl", "names")
         have |= set(todo)
+
+
+def small_suspects(series, nm):
+    """source_ids in tiny series (<= 3 issues) that share a title with another series:
+    often a mislabelled slice of the bigger run."""
+    by_title = defaultdict(list)
+    for s in series.values():
+        by_title[s["title"].lower()].append(s)
+    out = set()
+    for group in by_title.values():
+        if len(group) < 2:
+            continue
+        for s in group:
+            if len(s["recs"]) <= 3:
+                out |= {r["source_id"] for r in s["recs"] if r.get("source_id") and r["source_id"] not in nm}
+    return out
 
 
 def early_suspects(series, cgn, nm):
@@ -375,14 +391,21 @@ def marvel_names():
 def assemble(recs, nm, cgn):
     """Group records into named series: {key: {title, year, mseries, recs, cg}}.
 
-    Naming priority per issue: Continuity Guide label > marvel.com name for that issue >
+    Naming priority per issue: marvel.com name for that issue > Continuity Guide label >
     the heuristic volume's name (from a representative issue, or its earliest year).
+    (CG occasionally labels an issue with its release year, e.g. "X-Men (2020) #21" for X-Men (2019) #21.)
     """
     series = {}
+    alias = {}
+    ap = ROOT / "data" / "aliases.json"
+    if ap.exists():
+        for (ft, fy), (tt, ty) in json.load(open(ap))["aliases"]:
+            alias[(ft.lower(), fy)] = (tt, ty)
 
     def add(base, year, rs, pages, mseries=None):
         if not rs:
             return
+        base, year = alias.get((base.lower(), year), (base, year))
         key = f"{base.lower()}|{year}"
         s = series.setdefault(key, {"title": base, "year": year, "mseries": mseries, "recs": [], "cg": set()})
         s["recs"].extend(rs)
@@ -403,13 +426,13 @@ def assemble(recs, nm, cgn):
             if not year:
                 ys = [year_of(r["issued"]) for r in part if r["issued"]]
                 year = min(ys) if ys else None
-            # issues marvel.com names individually (and CG doesn't) go where marvel.com says,
-            # e.g. a 2019 digital re-release of X-Men (1963) #1 that clustered with X-Men (2019)
+            # issues marvel.com names individually go where marvel.com says, e.g. a 2019
+            # digital re-release of X-Men (1963) #1 that clustered with X-Men (2019)
             keep = []
             for r in part:
                 own = nm.get(r.get("source_id"))
                 ob, oy = parse_name(own and own["name"])
-                if r["drn"] not in cgn and ob and oy and (ob.lower(), oy) != (base.lower(), year):
+                if ob and oy and (ob.lower(), oy) != (base.lower(), year):
                     add(ob, oy, [r], [], own.get("series_id"))
                 else:
                     keep.append(r)
