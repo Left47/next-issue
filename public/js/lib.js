@@ -67,7 +67,8 @@ export function issueName(it) {
 
 // ---------- list codec ----------
 // List: {t, d, s:[{n, d, i:[item]}]}
-// item (compact): digitalId | [digitalId, flags, note] | "free text" | ["free text", flags, note]
+// item (compact): digitalId | [digitalId, flags, note, webUrl?] | "free text" | ["free text", flags, note]
+// webUrl: optional marvel.com page that replaces the app link (for issues the app can't open)
 // flags bit 1 = optional
 // Link: "2" + base64url(deflate-raw(JSON with delta-coded ids)); "1" = same without deltas (older links);
 // "0" = base64url(JSON) when CompressionStream is missing.
@@ -93,6 +94,7 @@ export function compact(list) {
   const item = (it) => {
     const key = it.id ?? it.text;
     const flags = it.opt ? 1 : 0;
+    if (it.web) return [key, flags, it.note || "", it.web];
     if (!flags && !it.note) return key;
     return it.note ? [key, flags, it.note] : [key, flags];
   };
@@ -109,8 +111,10 @@ export function compact(list) {
 
 export function expand(o) {
   const item = (x) => {
-    const [key, flags = 0, note = ""] = Array.isArray(x) ? x : [x];
-    return typeof key === "number" ? { id: key, opt: !!(flags & 1), note } : { text: String(key), opt: !!(flags & 1), note };
+    const [key, flags = 0, note = "", web] = Array.isArray(x) ? x : [x];
+    const it = typeof key === "number" ? { id: key, opt: !!(flags & 1), note } : { text: String(key), opt: !!(flags & 1), note };
+    if (safeWeb(web)) it.web = web;
+    return it;
   };
   return {
     title: o.t || "",
@@ -133,6 +137,11 @@ function deltas(o, dir) {
     });
   }
   return o;
+}
+
+// Web links in shared lists may only point at marvel.com, so a list can't send people elsewhere
+export function safeWeb(url) {
+  return typeof url === "string" && /^https:\/\/www\.marvel\.com\/[^\s"<>]*$/.test(url);
 }
 
 export async function encodeList(list) {

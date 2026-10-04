@@ -43,3 +43,16 @@ assert.equal(editDistance("wolverene", "wolverine", 1), 1);
 assert.equal(editDistance("hulk", "hawkeye", 1), 2);
 assert.equal(typoBudget("xmen"), 0);
 console.log("ok spelling");
+
+// web links survive a share link round trip, but only for www.marvel.com
+{
+  const { encodeList: enc, decodeList: dec } = await import("../public/js/lib.js");
+  const web = "https://www.marvel.com/comics/issue/72984/house_of_x_2019_1";
+  const l = { title: "w", desc: "", sections: [{ name: "", desc: "", items: [
+    { id: 52178, opt: false, note: "n", web },
+    { id: 51997, opt: false, note: "", web: "https://evil.example/phish" }] }] };
+  const back = await dec(await enc(l));
+  assert.equal(back.sections[0].items[0].web, web);
+  assert.equal(back.sections[0].items[1].web, undefined);
+  console.log("ok web links");
+}

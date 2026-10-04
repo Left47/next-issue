@@ -20,7 +20,10 @@ export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare
       const li = h("li", { class: `item${it.opt ? " opt" : ""}${marks.has(key) ? " done" : ""}`, dataset: { key } });
       const box = h("input", { type: "checkbox", checked: marks.has(key), "aria-label": `Mark ${title} as read`,
         onchange: () => setRead(li, key, box.checked) });
-      const act = iss
+      const act = it.web
+        ? h("a", { class: "btn read", href: it.web, target: "_blank", rel: "noopener",
+            onclick: () => { box.checked = true; setRead(li, key, true); returning = true; } }, "Read on web")
+        : iss
         ? h("a", { class: "btn read", href: appLink(iss), target: "_blank", rel: "noopener",
             onclick: () => { box.checked = true; setRead(li, key, true); returning = true; } }, "Read")
         : h("button", { class: "btn read", type: "button", onclick: () => copyText(title, "Title copied: paste it into the app's search") }, "Copy");
@@ -38,7 +41,7 @@ export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare
           !iss && !it.note && h("span", { class: "note" }, "No direct link. Tap Copy, then paste the title into the app's search.")),
         act);
       // what the "Next issue in <list>" bar needs to show and open this issue
-      li._next = { title, href: iss ? appLink(iss) : null, cover: iss?.cover, markRead: () => { box.checked = true; setRead(li, key, true); } };
+      li._next = { title, href: it.web || (iss ? appLink(iss) : null), web: !!it.web, cover: iss?.cover, markRead: () => { box.checked = true; setRead(li, key, true); } };
       rows.push(li);
       return li;
     });
@@ -109,7 +112,7 @@ export async function renderView(root, list, { code, onEdit, onCopyEdit, onShare
     unTitle.textContent = nx.title;
     unThumb.replaceChildren(nx.cover ? h("img", { src: coverUrl(nx.cover, 120), alt: "", width: 32, height: 48, referrerpolicy: "no-referrer" }) : "");
     unAct.replaceChildren(nx.href
-      ? h("a", { class: "btn primary", href: nx.href, target: "_blank", rel: "noopener", onclick: () => { nx.markRead(); returning = true; } }, "Read")
+      ? h("a", { class: "btn primary", href: nx.href, target: "_blank", rel: "noopener", onclick: () => { nx.markRead(); returning = true; } }, nx.web ? "Read on web" : "Read")
       : h("button", { class: "btn primary", type: "button", onclick: () => copyText(nx.title, "Title copied: paste it into the app's search") }, "Copy"));
   }
   // coming back from the Marvel app after tapping Read: bring the next issue into view

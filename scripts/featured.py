@@ -13,7 +13,12 @@ cg = {r["label"]: r["drn"] for r in catalog.read_jsonl("cg.jsonl")}
 
 # Notes for issues with a known problem on Marvel Unlimited's side
 NOTES = {
-    "House of X #1": "Marvel Unlimited only has the Director's Cut of #1, and it currently doesn't open for some subscribers. If it won't load, continue with Powers of X #1.",
+    "House of X #1": "The Marvel Unlimited app only has the Director's Cut of #1, which doesn't open. This opens the regular issue on marvel.com.",
+}
+
+# marvel.com pages that replace the app link (the list format only allows www.marvel.com)
+WEB = {
+    "House of X #1": "https://www.marvel.com/comics/issue/72984/house_of_x_2019_1",
 }
 
 
@@ -26,6 +31,8 @@ def item(it):
     key = d or it["title"]
     flags = 1 if it.get("optional") else 0
     note = NOTES.get(it["title"]) or it.get("note")
+    if it["title"] in WEB:
+        return [key, flags, note or "", WEB[it["title"]]]
     return [key, flags, note] if note else ([key, flags] if flags else key)
 
 out = {"t": src["title"],

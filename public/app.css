@@ -115,7 +115,7 @@ ol.items { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--
 .item .chk { display: grid; place-items: center; width: var(--tap); height: var(--tap); margin: -4px 0; cursor: pointer; }
 .item .t { min-width: 0; }
 .item .t b { font-weight: 600; }
-.item .read { min-height: 40px; min-width: 64px; color: var(--accent); border-color: var(--accent); background: transparent; }
+.item .read { white-space: nowrap; min-height: 40px; min-width: 64px; color: var(--accent); border-color: var(--accent); background: transparent; }
 .item .read:hover { background: var(--accent-soft); }
 .item.done .t b { color: var(--muted); text-decoration: line-through; text-decoration-color: var(--line); }
 .item.done .thumb { opacity: .45; }
