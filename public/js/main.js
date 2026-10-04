@@ -145,7 +145,7 @@ function home() {
   const mine = Object.entries(drafts.all()).sort((a, b) => b[1].updated - a[1].updated);
   const seen = recent.all();
 
-  app.replaceChildren(
+  app.replaceChildren(h("div", { class: "home-in" },
     h("header", { class: "hero" },
       h("p", { class: "eyebrow" }, "Unofficial companion for Marvel Unlimited subscribers"),
       h("h1", { class: "hero-h" }, "Build & share ", h("span", { class: "nw" }, "Marvel reading lists")),
@@ -193,7 +193,7 @@ function home() {
         ", which has excellent hand-built reading orders for the ",
         h("a", { href: `${CG}/marvel-modern`, target: "_blank", rel: "noopener" }, "modern"), " and ",
         h("a", { href: `${CG}/marvel-premodern`, target: "_blank", rel: "noopener" }, "classic"),
-        " Marvel eras. Go read those.")));
+        " Marvel eras. Go read those."))));
 }
 
 function ago(t) {

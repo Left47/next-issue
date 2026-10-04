@@ -179,8 +179,8 @@ export async function renderEditor(root, list, draftId, { onPreview, onDetails }
           addIssues(pick);
         } }, "Add")),
       h("div", { class: "tiles" }, current.issues.map(tile)),
-      current.cg?.length > 0 && h("p", { class: "credit" }, "Series name from ",
-        h("a", { href: "https://www.continuityguide.net/" + current.cg[0], target: "_blank", rel: "noopener" }, "Continuity Guide"), "."));
+      current.cg?.length > 0 ? h("p", { class: "credit" }, "Series name from ",
+        h("a", { href: "https://www.continuityguide.net/" + current.cg[0], target: "_blank", rel: "noopener" }, "Continuity Guide"), ".") : "");
     results.hidden = true; seriesBox.hidden = false;
     addPane.scrollTop = 0;
   }
