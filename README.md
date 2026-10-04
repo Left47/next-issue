@@ -29,7 +29,7 @@ Unofficial. Not affiliated with Marvel. Readers need their own Marvel Unlimited 
 | `scripts/catalog.py` | Catalog pipeline (scan, enrich, cg, names, build, update) |
 | `scripts/pipeline.sh` | Full resumable catalog build |
 | `data/raw/` | Append-only JSONL from the pipeline (source of truth for rebuilds) |
-| `data/cg/` | Saved Continuity Guide pages (series names, years, issue links) |
+| `data/cg/pages.txt` | Continuity Guide pages to read when refreshing issue labels. The pages themselves are downloaded locally and not committed; only the extracted links and labels (`data/raw/cg.jsonl`) are. |
 
 ## Links
 
