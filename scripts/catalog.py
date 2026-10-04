@@ -12,7 +12,7 @@
 All raw files are append-only JSONL so any step can be interrupted and resumed.
 Endpoints are undocumented; keep concurrency low and requests polite.
 """
-import concurrent.futures as cf, html, json, os, re, ssl, sys, threading, time, urllib.request
+import concurrent.futures as cf, html, json, os, re, ssl, sys, threading, time, urllib.error, urllib.request
 from collections import defaultdict
 from pathlib import Path
 
@@ -122,6 +122,11 @@ def issue(rec):
         t = fetch(f"https://share.marvel.com/sharing/issue/{drn}/raw")
         j = json.loads(t)
         c = j["data"]["appProfileForDevice"]["sections"][0]["pageByPath"]["templateContent"]
+    except urllib.error.HTTPError as e:
+        # a definite "no such issue" is remembered so weekly runs don't keep asking
+        return {"drn": drn, "failed": e.code} if e.code in (400, 404, 410) else None
+    except (KeyError, IndexError, TypeError, ValueError):
+        return {"drn": drn, "failed": "no data"}
     except Exception:
         return None
     cover = None
@@ -149,7 +154,7 @@ def enrich():
 
 def joined():
     """digital_id -> merged record with issue details."""
-    det = {r["drn"]: r for r in read_jsonl("issues.jsonl")}
+    det = {r["drn"]: r for r in read_jsonl("issues.jsonl") if not r.get("failed")}
     out = {}
     for d, r in found_records().items():
         e = det.get(r["drn"], {})
@@ -261,7 +266,8 @@ def marvel_name(source_id):
 
 
 def names():
-    have = {r["source_id"] for r in read_jsonl("names.jsonl") if not r.get("error")}
+    # a 404 from marvel.com is settled; other errors (timeouts, blocks) get retried
+    have = {r["source_id"] for r in read_jsonl("names.jsonl") if not r.get("error") or str(r.get("error")) == "404"}
     vols = cluster(joined())
     cgn = cg_names()
     todo = []
@@ -285,6 +291,7 @@ def names():
         nm = marvel_names()
         series = assemble(recs, nm, cgn)
         todo = sorted((duplicate_suspects(series, cgn, nm) | early_suspects(series, cgn, nm) | small_suspects(series, nm)) - have)
+        # (suspect checks skip anything already looked up, including 404s)
         print(f"names: {len(todo)} misplaced-looking issues to look up", file=sys.stderr)
         if not todo:
             break
@@ -468,7 +475,7 @@ def duplicate_suspects(series, cgn, nm):
 
 def build():
     # only issues with details (number, date, cover); newly scanned ones join after the enrich step
-    enriched = {r["drn"] for r in read_jsonl("issues.jsonl")}
+    enriched = {r["drn"] for r in read_jsonl("issues.jsonl") if not r.get("failed")}
     recs = {d: r for d, r in joined().items() if r["drn"] in enriched}
     nm = marvel_names()
     cgn = cg_names()
