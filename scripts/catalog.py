@@ -520,18 +520,21 @@ def build():
 
 
 def update():
-    state = legacy_state()
-    top = max(state) if state else 44000
-    # scan past the highest seen ID; stop once a long empty run appears
-    start = top + 1
-    while True:
+    # New releases get IDs just past the newest comic found. IDs out there were checked before
+    # and came back empty, so re-check them (force) and only record what's new. Stop after two
+    # empty blocks in a row.
+    found = [d for d, r in legacy_state().items() if r.get("drn")]
+    start = (max(found) if found else 44000) + 1
+    empty = 0
+    while empty < 2:
         ids = list(range(start, start + 1000))
-        scan_ids(ids)
+        before = legacy_state()
+        run_pool(lambda d: (lambda r: r if r.get("drn") or r.get("error") or d not in before else None)(legacy(d)),
+                 ids, "legacy.jsonl", "scan")
         st = legacy_state()
         hits = [i for i in ids if st.get(i, {}).get("drn")]
         print(f"update: {start}-{start+999}: {len(hits)} hits", file=sys.stderr)
-        if not hits:
-            break
+        empty = 0 if hits else empty + 1
         start += 1000
     enrich()
     names()
