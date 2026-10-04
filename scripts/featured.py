@@ -11,17 +11,13 @@ src = json.load(open(ROOT / "data" / "dawn_of_x_reading_order.json"))
 by_drn = {r["drn"]: r for r in catalog.joined().values()}
 cg = {r["label"]: r["drn"] for r in catalog.read_jsonl("cg.jsonl")}
 
-# Issues whose only direct link is the wrong edition: keep them as copyable titles with a note.
-UNLINKED = {
-    "House of X #1": ("House of X (2019) #1",
-                      "The only direct link is the Director's Cut, which some subscribers see as locked. Tap Copy and search the app for the regular issue."),
+# Notes for issues with a known problem on Marvel Unlimited's side
+NOTES = {
+    "House of X #1": "Marvel Unlimited only has the Director's Cut of #1, and it currently doesn't open for some subscribers. If it won't load, continue with Powers of X #1.",
 }
 
 
 def item(it):
-    if it["title"] in UNLINKED:
-        title, note = UNLINKED[it["title"]]
-        return [title, 1 if it.get("optional") else 0, note]
     d = it.get("digital_id")
     if not d:
         # e.g. House of X #1: find its DRN via Continuity Guide's label, then its digital id
@@ -29,7 +25,8 @@ def item(it):
         d = by_drn.get(drn, {}).get("digital_id")
     key = d or it["title"]
     flags = 1 if it.get("optional") else 0
-    return [key, flags, it["note"]] if it.get("note") else ([key, flags] if flags else key)
+    note = NOTES.get(it["title"]) or it.get("note")
+    return [key, flags, note] if note else ([key, flags] if flags else key)
 
 out = {"t": src["title"],
        "d": "Issue-by-issue order from House of X / Powers of X through X of Swords. Based on The Gotham Archives' order, plus three optional side reads.",
