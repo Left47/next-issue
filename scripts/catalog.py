@@ -406,10 +406,12 @@ def assemble(recs, nm, cgn):
         if not rs:
             return
         base, year = alias.get((base.lower(), year), (base, year))
-        key = f"{base.lower()}|{year}"
-        s = series.setdefault(key, {"title": base, "year": year, "mseries": mseries, "recs": [], "cg": set()})
+        # "The Amazing Spider-Man" / "Amazing Spider-Man", "Punisher: War Journal" / "Punisher War Journal": one series
+        key = f"{title_key(base)}|{year}"
+        s = series.setdefault(key, {"title": base, "year": year, "mseries": mseries, "recs": [], "cg": set(), "titles": defaultdict(int)})
         s["recs"].extend(rs)
         s["cg"].update(pages)
+        s["titles"][base] += len(rs)
 
     for v in cluster(recs):
         rs = v["recs"]
@@ -437,7 +439,15 @@ def assemble(recs, nm, cgn):
                 else:
                     keep.append(r)
             add(base, year, keep, pages, name_rec and name_rec.get("series_id"))
+    for s in series.values():
+        s["title"] = max(s["titles"], key=s["titles"].get)  # the spelling most of its issues use
     return series
+
+
+def title_key(t):
+    """Spelling-insensitive series title (matches compactKey in public/js/lib.js)."""
+    t = re.sub(r"[^a-z0-9]+", " ", t.lower().replace("&", " and ")).strip()
+    return re.sub(r"^the ", "", t).replace(" ", "")
 
 
 def duplicate_suspects(series, cgn, nm):

@@ -433,6 +433,10 @@ async function pickByYear(cands, wanted, year) {
     if (!best) continue;
     const top = cands.filter((_, i) => m[i][key] === best);
     if (top.length === 1) return top[0];
+    // tie (e.g. X-Men (2019) #4 and a 2020 re-release of X-Men (1963) #4): prefer the run
+    // that started closest to, and not after, that year
+    const started = top.filter((c) => c.y && c.y <= year).sort((a, b) => b.y - a.y);
+    if (started.length && (started.length === 1 || started[0].y !== started[1].y)) return started[0];
   }
   return null;
 }
