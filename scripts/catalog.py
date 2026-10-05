@@ -275,7 +275,7 @@ def names():
         if any(r["drn"] in cgn for r in v["recs"]):
             continue
         # one representative per volume: the earliest issue that has a source_id
-        rep = next((r["source_id"] for r in sorted(v["recs"], key=lambda r: (r["num"] is None, r["num"] or 0))
+        rep = next((r["source_id"] for r in sorted(v["recs"], key=rep_order)
                     if r.get("source_id")), None)
         if rep and rep not in have:
             todo.append(rep)
@@ -395,6 +395,13 @@ def marvel_names():
     return {r["source_id"]: r for r in read_jsonl("names.jsonl") if not r.get("error") and r.get("name")}
 
 
+def rep_order(r):
+    """Which issue names a volume: #1 first, then other whole numbers, then specials like
+    #0.5, which marvel.com often files as their own one-shot series."""
+    n = r["num"]
+    return (n is None, not (n is not None and n >= 1 and float(n).is_integer()), n or 0)
+
+
 def assemble(recs, nm, cgn):
     """Group records into named series: {key: {title, year, mseries, recs, cg}}.
 
@@ -423,7 +430,7 @@ def assemble(recs, nm, cgn):
     for v in cluster(recs):
         rs = v["recs"]
         name_rec = None
-        for r in sorted(rs, key=lambda r: (r["num"] is None, r["num"] or 0)):
+        for r in sorted(rs, key=rep_order):
             if r.get("source_id") in nm:
                 name_rec = nm[r["source_id"]]
                 break
