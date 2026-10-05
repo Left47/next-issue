@@ -233,9 +233,13 @@ export async function renderEditor(root, list, draftId, { onPreview, onDetails }
   const pasteIn = h("textarea", { rows: 8, placeholder: "One per line, e.g.\n# House of X\nHouse of X (2019) #1\nPowers of X #1-2 (2019)\nMarauders 2019 #1-6\nX-Men #1", "aria-label": "Paste a reading order" });
   const pasteOut = h("div", { class: "paste-out", "aria-live": "polite" });
   const importBtn = h("button", { class: "btn primary", type: "button", onclick: runImport }, "Import");
+  const byDate = h("input", { type: "checkbox", checked: true });
   pasteBox.append(
     h("p", { class: "hint" }, "Paste a reading order. Lines starting with # become sections. If a title matches more than one series, we'll ask which one. Anything we can't match is kept as a title you can copy into the app's search."),
-    pasteIn, importBtn, pasteOut);
+    pasteIn,
+    h("label", { class: "paste-opt" }, byDate,
+      h("span", {}, h("b", {}, "Order by release date"), h("span", { class: "meta" }, "Mixes series together by when each issue came out, within each section. Untick to keep your pasted order."))),
+    importBtn, pasteOut);
 
   async function runImport() {
     if (!pasteIn.value.trim()) return toast("Paste some lines first");
@@ -288,7 +292,7 @@ export async function renderEditor(root, list, draftId, { onPreview, onDetails }
   }
 
   async function finishImport(plan, choices) {
-    const r = await applyPlan(plan, choices, list, target, info);
+    const r = await applyPlan(plan, choices, list, target, info, { byDate: byDate.checked });
     target = list.sections.length - 1;
     save(); drawList(); drawTargets(); refreshTiles();
     pasteOut.replaceChildren(h("p", {}, `Added ${r.added} issue${r.added === 1 ? "" : "s"}.`),
@@ -514,18 +518,25 @@ export async function planImport(text) {
   return { plan, questions: qs };
 }
 
-// choices: question key -> series id, or null to keep those lines as text
-export async function applyPlan(plan, choices, list, target, info) {
+// choices: question key -> series id, or null to keep those lines as text.
+// byDate: within each section, interleave the imported issues by release date.
+export async function applyPlan(plan, choices, list, target, info, { byDate = false } = {}) {
   let sec = list.sections[target];
   let added = 0;
   const missed = [];
+  const fresh = new Map(); // section -> [{item, date, sid}] added by this import, in pasted order
+  const push = (item, date = null, sid = null) => {
+    if (!fresh.has(sec)) fresh.set(sec, []);
+    fresh.get(sec).push({ item, date, sid });
+    sec.items.push(item);
+  };
   for (const e of plan) {
     if (e.kind === "section") {
       if (sec.items.length || sec.name) list.sections.push((sec = { name: e.name, desc: "", items: [] }));
       else sec.name = e.name;
       continue;
     }
-    if (e.kind === "text") { missed.push(e.text); sec.items.push({ text: e.text, opt: false, note: "" }); continue; }
+    if (e.kind === "text") { missed.push(e.text); push({ text: e.text, opt: false, note: "" }); continue; }
     const sid = e.q ? choices.get(e.q) : e.sid;
     const s = sid ? await loadSeries(sid).catch(() => null) : null;
     for (const n of nums(e.p)) {
@@ -533,15 +544,40 @@ export async function applyPlan(plan, choices, list, target, info) {
       if (iss) {
         if (!sec.items.some((x) => x.id === iss.id)) {
           info.set(iss.id, iss);
-          sec.items.push({ id: iss.id, opt: false, note: "" });
+          push({ id: iss.id, opt: false, note: "" }, iss.date, sid);
           added++;
         }
         continue;
       }
       const label = s ? `${seriesName(s.t, s.y)} #${n}` : `${e.p.title}${e.p.year ? ` (${e.p.year})` : ""} #${n}`;
       missed.push(label);
-      sec.items.push({ text: label, opt: false, note: "" });
+      push({ text: label, opt: false, note: "" });
+    }
+  }
+  if (byDate) {
+    for (const [sc, rows] of fresh) {
+      const order = releaseOrder(rows);
+      sc.items.splice(sc.items.length - rows.length, rows.length, ...order.map((r) => r.item));
     }
   }
   return { added, missed };
+}
+
+// Interleave several series by release date while keeping each series in the order given.
+// rows: [{item, date, sid}]. Catalog dates are sometimes a later digital re-release (Ultimate
+// Spider-Man #1 is dated 2006), so an issue counts as no later than the next issue of its
+// series. Rows without a date (unmatched titles) stay right after the row before them.
+export function releaseOrder(rows) {
+  const eff = new Array(rows.length).fill(null);
+  const next = new Map();
+  for (let i = rows.length - 1; i >= 0; i--) {
+    const { date, sid } = rows[i];
+    if (!date) continue;
+    const later = next.get(sid);
+    eff[i] = later && later < date ? later : date;
+    next.set(sid, eff[i]);
+  }
+  let prev = "";
+  const keyed = rows.map((r, i) => ({ r, i, k: (prev = eff[i] ?? prev) }));
+  return keyed.sort((a, b) => (a.k < b.k ? -1 : a.k > b.k ? 1 : a.i - b.i)).map((x) => x.r);
 }

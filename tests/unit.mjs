@@ -56,3 +56,21 @@ console.log("ok spelling");
   assert.equal(back.sections[0].items[1].web, undefined);
   console.log("ok web links");
 }
+
+// paste import: interleave series by release date, each series stays in issue order
+{
+  const { releaseOrder } = await import("../public/js/edit.js");
+  const r = (label, date, sid) => ({ item: label, date, sid });
+  const ids = (rows) => releaseOrder(rows).map((x) => x.item);
+  // two series listed one after the other come out interleaved
+  assert.deepEqual(ids([
+    r("A1", "2003-09-01", "a"), r("A2", "2003-10-01", "a"), r("A3", "2003-11-01", "a"),
+    r("B1", "2003-10-08", "b"), r("B2", "2003-11-08", "b")]), ["A1", "A2", "B1", "A3", "B2"]);
+  // a later re-release date on #1 doesn't push it after #2
+  assert.deepEqual(ids([r("U1", "2006-10-24", "u"), r("U2", "2000-10-04", "u"), r("X1", "2001-01-01", "x")]), ["U1", "U2", "X1"]);
+  // unmatched titles stay after the issue before them; same-date ties keep pasted order
+  assert.deepEqual(ids([
+    r("B1", "2004-01-01", "b"), r("text after B1", null, null),
+    r("A1", "2003-01-01", "a"), r("A2", "2004-01-01", "a")]), ["A1", "B1", "text after B1", "A2"]);
+  console.log("ok release order");
+}
